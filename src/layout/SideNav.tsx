@@ -101,7 +101,7 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
             <Box sx={{ width: "9.7em" }}>
               <img
                 src={connectedLogo}
-                alt="schoola logo"
+                alt="connected logo"
                 style={{ width: "100%", height: "auto" }}
               />
             </Box>
