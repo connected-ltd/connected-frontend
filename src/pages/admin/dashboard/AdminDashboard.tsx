@@ -21,10 +21,6 @@ const AdminDashboard = () => {
   const yorubaSpeakers = numbers?.data.filter(
     (number) => number.language === "yoruba"
   ).length;
-  console.log(hausaSepakers);
-  console.log(englishSpeakers);
-  console.log(igboSpeakers);
-  console.log(yorubaSpeakers);
 
   const overviewCard = [
     {
