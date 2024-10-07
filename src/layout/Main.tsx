@@ -68,7 +68,7 @@ function Main({ drawerWidth, handleDrawerToggle }: Props) {
               borderRadius: "6px",
             }}
           >
-            <Menu sx={{ color: "#FFA534" }} />
+            <Menu sx={{ color: "#025692" }} />
           </IconButton>
           <Button
             sx={{
