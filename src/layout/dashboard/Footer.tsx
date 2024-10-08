@@ -15,7 +15,7 @@ function Footer() {
         variant="body1"
         sx={{ fontSize: "12px", lineHeight: "12px", color: "grey" }}
       >
-        &copy; {currentYear} Schoola Learn Inc.
+        &copy; {currentYear} ConnectED Technologies Ltd.
       </Typography>
     </Box>
   );

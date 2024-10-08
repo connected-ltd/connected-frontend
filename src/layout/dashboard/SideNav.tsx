@@ -5,19 +5,19 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Box, useTheme, Typography, SvgIcon, IconButton } from "@mui/material";
-import { FilledButton } from "../custom-components/styled/styledButtons";
 import { useDispatch } from "react-redux";
 import React from "react";
-import { logout } from "../pages/auth/authSlice";
+import { logout } from "../../pages/auth/authSlice";
 //icons
-import connectedLogo from "../assets/icons/connected-logo.svg";
-import SideOverview from "../assets/icons/side-overview.svg?react";
+import connectedLogo from "../../assets/icons/connected-logo.svg";
+import SideOverview from "../../assets/icons/side-overview.svg?react";
 // import SideNotes from "../assets/icons/side-notes.svg?react";
 // import sideQUiz from "../assets/icons/side-quiz.svg?react";
 // import sideQuestions from "../assets/icons/side-question.svg?react";
 // import sideMedia from "../assets/icons/side-media.svg?react";
 // import sideReview from "../assets/icons/side-review.svg?react";
 import { Add, KeyboardArrowLeft } from "@mui/icons-material";
+import { FilledButton } from "../../custom-components/styled/styledButtons";
 
 type Props = {
   drawerWidth: number;
