@@ -80,7 +80,7 @@ const Router = () => {
       </Route>
 
       {/* Admin routes */}
-      {currentUserRole === "admin" ? (
+      {currentUserRole === "admin" || currentUserRole === "super_admin" ? (
         <Route
           //protected pages
           element={
