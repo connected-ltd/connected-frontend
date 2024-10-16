@@ -1,6 +1,6 @@
 import { connectedApiSlice } from "../../app/connectedApiSlice";
 import { Areas } from "../../types/areas.types";
-import { Numbers, NumbersInput } from "../../types/number.types";
+import { Numbers, NumbersInput, NumberStats } from "../../types/number.types";
 
 const apiSliceWithTags = connectedApiSlice.enhanceEndpoints({
   addTagTypes: ["numbers", "areas"],
@@ -22,6 +22,13 @@ const QuestionApiSlice = apiSliceWithTags.injectEndpoints({
       query: () => "/numbers",
       providesTags: ["numbers"],
     }),
+    getNumbersStats: builder.query<
+      { message: string; data: NumberStats[]; status: string },
+      void
+    >({
+      query: () => "/numbers/stats",
+      providesTags: ["numbers"],
+    }),
     createNumbers: builder.mutation<Numbers[], NumbersInput>({
       query: (values) => ({
         url: "/numbers",
@@ -36,5 +43,6 @@ const QuestionApiSlice = apiSliceWithTags.injectEndpoints({
 export const {
   useGetAreasQuery,
   useGetNumbersQuery,
+  useGetNumbersStatsQuery,
   useCreateNumbersMutation,
 } = QuestionApiSlice;

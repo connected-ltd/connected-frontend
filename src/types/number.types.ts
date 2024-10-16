@@ -7,6 +7,14 @@ export interface Numbers {
   updated_at: string;
 }
 
+export interface NumberStats {
+  english: number;
+  hausa: number;
+  igbo: number;
+  total: number;
+  yoruba: number;
+}
+
 export interface NumbersInput {
   number: string;
   language: string;
