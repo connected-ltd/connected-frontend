@@ -9,7 +9,8 @@ import { useDispatch } from "react-redux";
 import React from "react";
 import { logout } from "../../pages/auth/authSlice";
 //icons
-import connectedLogo from "../../assets/icons/connected-logo.svg";
+import connectedLogoLight from "../../assets/icons/connected-logo-light.svg";
+import connectedLogoDark from "../../assets/icons/connected-logo-dark.svg";
 import SideOverview from "../../assets/icons/side-overview.svg?react";
 // import SideNotes from "../assets/icons/side-notes.svg?react";
 // import sideQUiz from "../assets/icons/side-quiz.svg?react";
@@ -18,6 +19,7 @@ import SideOverview from "../../assets/icons/side-overview.svg?react";
 // import sideReview from "../assets/icons/side-review.svg?react";
 import { Add, KeyboardArrowLeft } from "@mui/icons-material";
 import { FilledButton } from "../../custom-components/styled/styledButtons";
+import { useThemeContext } from "../../styles/ThemeContext";
 
 type Props = {
   drawerWidth: number;
@@ -31,11 +33,12 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isLoading, setIsLoading] = React.useState(false);
+  const { mode } = useThemeContext();
 
   const handleLogout = () => {
     setIsLoading(true);
     dispatch(logout());
-    navigate("/");
+    navigate("/login");
     setIsLoading(false);
   };
 
@@ -100,7 +103,7 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
           <Box>
             <Box sx={{ width: "9.7em" }}>
               <img
-                src={connectedLogo}
+                src={mode === "light" ? connectedLogoLight : connectedLogoDark}
                 alt="connected logo"
                 style={{ width: "100%", height: "auto" }}
               />

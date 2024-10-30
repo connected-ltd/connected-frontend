@@ -12,6 +12,7 @@ import { useAppDispatch } from "../app/hooks";
 import AdminDashboard from "../pages/admin/dashboard/AdminDashboard";
 import Dashboard from "../pages/organization/Dashboard";
 import AddNumbers from "../pages/admin/numbers/AddNumbers";
+import Landing from "../pages/landing/Landing";
 // Organization routes
 
 type ProtectedRoute = {
@@ -24,7 +25,7 @@ const ProtectedRoute = ({ user, children }: ProtectedRoute) => {
   const isAuth = !!user;
 
   if (!isAuth) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
@@ -62,7 +63,10 @@ const Router = () => {
 
   useEffect(() => {
     //route the user to dashboard, if a logged in user tries to access signin page
-    if (!!user && location.pathname === "/") {
+    if (
+      !!user &&
+      (location.pathname === "/" || location.pathname === "/login")
+    ) {
       navigate("/dashboard");
     }
   }, [navigate, user]);
@@ -71,7 +75,8 @@ const Router = () => {
     <Routes>
       <Route element={<NoNav />}>
         {/* public routes that dont have the sidebar nav */}
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<h1>Url does not match</h1>} />
         {/*
          Landing page routing below 

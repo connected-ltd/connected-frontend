@@ -1,12 +1,13 @@
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./styles/theme";
+import { CssBaseline } from "@mui/material";
 import Router from "./routers/Router";
+import { ThemeProviderWrapper } from "./styles/ThemeContext";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProviderWrapper>
+      <CssBaseline />
       <Router />
-    </ThemeProvider>
+    </ThemeProviderWrapper>
   );
 }
 
