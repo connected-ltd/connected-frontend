@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import {
   Box,
   Typography,
-  Button,
-  Stack,
   ToggleButtonGroup,
   ToggleButton,
 } from "@mui/material";
-import MouseIcon from "@mui/icons-material/Mouse";
-import EditIcon from "@mui/icons-material/Edit";
-import CodeIcon from "@mui/icons-material/Code";
 import citizensIcon from "../../../assets/icons/citizens-icon.svg";
 import informationProviderIcon from "../../../assets/icons/information-provider-icon.svg";
 
@@ -85,7 +80,7 @@ const For = () => {
             sx={{
               backgroundColor: "#025692",
               borderRadius: "40px",
-              padding: "5em",
+              padding: "2em 4em",
               marginTop: "2em",
             }}
           >
@@ -166,76 +161,6 @@ const For = () => {
               </Box>
             )}
           </Box>
-        </Box>
-
-        <Box sx={{ mt: 8 }}>
-          <Typography
-            sx={{
-              fontSize: "24px",
-              fontWeight: 500,
-              mb: 1,
-            }}
-          >
-            Stay ConnectED
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "20px",
-              fontWeight: 400,
-              mb: 3,
-              opacity: 0.9,
-            }}
-          >
-            with our kickass team.
-          </Typography>
-
-          <Stack direction="row" spacing={2}>
-            <Button
-              variant="contained"
-              startIcon={<MouseIcon />}
-              sx={{
-                borderRadius: "8px",
-                padding: "8px 16px",
-                textTransform: "none",
-                backgroundColor: "#0078D4",
-                "&:hover": {
-                  backgroundColor: "#0067B5",
-                },
-              }}
-            >
-              Click
-            </Button>
-            <Button
-              variant="contained"
-              startIcon={<EditIcon />}
-              sx={{
-                borderRadius: "8px",
-                padding: "8px 16px",
-                textTransform: "none",
-                backgroundColor: "#0078D4",
-                "&:hover": {
-                  backgroundColor: "#0067B5",
-                },
-              }}
-            >
-              Ask to edit
-            </Button>
-            <Button
-              variant="contained"
-              startIcon={<CodeIcon />}
-              sx={{
-                borderRadius: "8px",
-                padding: "8px 16px",
-                textTransform: "none",
-                backgroundColor: "#2D2D2D",
-                "&:hover": {
-                  backgroundColor: "#3D3D3D",
-                },
-              }}
-            >
-              {"</>"}
-            </Button>
-          </Stack>
         </Box>
       </Box>
     </Box>
