@@ -45,13 +45,18 @@ const Features = () => {
                         fontWeight: 700,
                         marginBottom: "1em",
                         textTransform: "uppercase",
+                        color: "#fff",
                       }}
                     >
                       {card.label}
                     </Typography>
                     <Typography
                       variant="body2"
-                      sx={{ fontSize: "1rem", lineHeight: "22px" }}
+                      sx={{
+                        fontSize: "1rem",
+                        lineHeight: "22px",
+                        color: "#fff",
+                      }}
                     >
                       {card.text}
                     </Typography>
