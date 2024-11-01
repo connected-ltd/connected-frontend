@@ -15,6 +15,7 @@ import { FilledButton } from "../../../custom-components/styled/styledButtons";
 import connectedLogoLight from "../../../assets/icons/connected-logo-light.svg";
 import connectedLogoDark from "../../../assets/icons/connected-logo-dark.svg";
 import flag from "../../../assets/icons/flag.svg";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 // const navItems = ["Home", "Services", "About", "Contact"];
@@ -29,6 +30,8 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { mode, toggleColorMode } = useThemeContext();
   const theme = useTheme();
+  const navigate = useNavigate();
+  const handleLogin = () => navigate("login");
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -72,7 +75,7 @@ const Header = () => {
               </ListItemButton>
             </ListItem>
           ))}
-          <ListItemButton onClick={toggleColorMode} sx={{ textAlign: "left" }}>
+          <ListItemButton sx={{ textAlign: "left" }}>
             <ListItemText
               primary="Sign Up"
               sx={{
@@ -80,7 +83,7 @@ const Header = () => {
               }}
             />
           </ListItemButton>
-          <ListItemButton onClick={toggleColorMode} sx={{ textAlign: "left" }}>
+          <ListItemButton onClick={handleLogin} sx={{ textAlign: "left" }}>
             <ListItemText
               primary="Login"
               sx={{
@@ -112,6 +115,8 @@ const Header = () => {
         paddingX: "1em",
         paddingY: "1em",
         overflowX: "hidden",
+        maxWidth: "1550px",
+        margin: "0 auto",
       }}
     >
       {/* <CssBaseline /> */}
@@ -187,6 +192,7 @@ const Header = () => {
                   fontSize: { xs: ".6rem", md: ".7rem" },
                   borderRadius: "30px",
                 }}
+                onClick={handleLogin}
               >
                 Login
               </FilledButton>

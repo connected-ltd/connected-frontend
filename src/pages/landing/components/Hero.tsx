@@ -8,19 +8,39 @@ const Hero = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: { xs: "center", md: "space-between" },
           alignItems: "center",
+          width: "100%",
+          flexDirection: { xs: "column", md: "row" },
         }}
         id="home"
       >
-        <Box sx={{ width: "50%" }}>
-          <Typography variant="h3" sx={{ fontSize: "3rem", fontWeight: 800 }}>
+        <Box
+          sx={{
+            display: { xs: "flex", md: "block" },
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            textAlign: { xs: "center", md: "left" },
+          }}
+        >
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: { xs: "2rem", md: "2.3rem", lg: "3rem" },
+              fontWeight: 800,
+            }}
+          >
             Bridging Knowledge Gaps, Empowering All with{" "}
             <span style={{ color: "#2085BE" }}>Personalized AI Solutions</span>
           </Typography>
           <Typography
             variant="body2"
-            sx={{ fontSize: "1rem", margin: "1em 0", lineHeight: "30px" }}
+            sx={{
+              fontSize: { xs: ".9rem", md: "1rem" },
+              margin: "1em 0",
+              lineHeight: "30px",
+            }}
           >
             In an era where personalized answers and tailored information are
             paramount, ConnectED stands as a beacon, leveraging cutting-edge AI
@@ -28,13 +48,25 @@ const Hero = () => {
             experience.
           </Typography>
           <FilledButton
-            sx={{ borderRadius: "50px", padding: "1em", fontSize: "1rem" }}
+            sx={{
+              borderRadius: "50px",
+              padding: "1em",
+              fontSize: "1rem",
+              margin: { xs: "1em 0", md: "0" },
+            }}
           >
             Open Account
           </FilledButton>
         </Box>
-        <Box sx={{ width: "31em" }}>
-          <img src={map} style={{ width: "100%" }} />
+        <Box
+          sx={{
+            width: { xs: "95%", sm: "80%", md: "50%" },
+            marginTop: { xs: "2em", md: "0" },
+          }}
+        >
+          <Box sx={{ width: { md: "24em", lg: "31em" } }}>
+            <img src={map} style={{ width: "100%" }} />
+          </Box>
         </Box>
       </Box>
     </Box>

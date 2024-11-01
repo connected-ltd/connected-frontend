@@ -33,16 +33,26 @@ const Contact = () => {
   const { mode } = useThemeContext();
 
   return (
-    <Box sx={{ marginTop: "5em" }}>
+    <Box sx={{ margin: "5em 0" }}>
       <Box id="contact">
-        <Box sx={{ width: "30%" }}>
-          <Typography variant="h3" sx={{ fontSize: "2.5rem", fontWeight: 800 }}>
+        <Box sx={{ width: { xs: "100%", md: "30%" } }}>
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
+              fontWeight: 800,
+            }}
+          >
             Stay <span style={{ color: "#2085BE" }}>ConnectED</span> with our
             kickass team.
           </Typography>
           <Typography
             variant="body2"
-            sx={{ fontSize: "1rem", margin: "2em 0", lineHeight: "30px" }}
+            sx={{
+              fontSize: { xs: ".9rem", md: "1rem" },
+              margin: "2em 0",
+              lineHeight: "30px",
+            }}
           >
             We would love to hear from you and discuss how we can help bring
             your digital ideas to life. Here are the different ways you can get
@@ -54,22 +64,23 @@ const Contact = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            flexDirection: { xs: "column", md: "row" },
           }}
         >
           <Box
             component="form"
             onSubmit={formik.handleSubmit}
-            sx={{ width: "60%" }}
+            sx={{ width: { xs: "100%", md: "60%" } }}
           >
             <Grid2 container spacing={2}>
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <FormControl error fullWidth>
                   <Typography
                     variant="body2"
                     sx={{
-                      fontSize: "1rem",
+                      fontSize: { xs: ".8rem", md: "1rem" },
                       fontWeight: 600,
-                      marginBottom: ".5em",
+                      marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
                     }}
                   >
@@ -88,14 +99,14 @@ const Contact = () => {
                   />
                 </FormControl>
               </Grid2>
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <FormControl error fullWidth>
                   <Typography
                     variant="body2"
                     sx={{
-                      fontSize: "1rem",
+                      fontSize: { xs: ".8rem", md: "1rem" },
                       fontWeight: 600,
-                      marginBottom: ".5em",
+                      marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
                     }}
                   >
@@ -115,14 +126,14 @@ const Contact = () => {
                   />
                 </FormControl>
               </Grid2>
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <FormControl error fullWidth>
                   <Typography
                     variant="body2"
                     sx={{
-                      fontSize: "1rem",
+                      fontSize: { xs: ".8rem", md: "1rem" },
                       fontWeight: 600,
-                      marginBottom: ".5em",
+                      marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
                     }}
                   >
@@ -141,14 +152,14 @@ const Contact = () => {
                   />
                 </FormControl>
               </Grid2>
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <FormControl error fullWidth>
                   <Typography
                     variant="body2"
                     sx={{
-                      fontSize: "1rem",
+                      fontSize: { xs: ".8rem", md: "1rem" },
                       fontWeight: 600,
-                      marginBottom: ".5em",
+                      marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
                     }}
                   >
@@ -167,14 +178,14 @@ const Contact = () => {
                   />
                 </FormControl>
               </Grid2>
-              <Grid2 size={6}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 <FormControl error fullWidth>
                   <Typography
                     variant="body2"
                     sx={{
-                      fontSize: "1rem",
+                      fontSize: { xs: ".8rem", md: "1rem" },
                       fontWeight: 600,
-                      marginBottom: ".5em",
+                      marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
                     }}
                   >
@@ -198,16 +209,17 @@ const Contact = () => {
             <FilledButton
               sx={{
                 textTransform: "uppercase",
-                margin: "1em 0",
+                margin: { xs: "2em 0", md: "1em 0" },
                 borderRadius: "50px",
                 padding: "1.3em",
+                fontSize: { xs: ".8rem", md: "1rem" },
               }}
               type="submit"
             >
               Send message
             </FilledButton>
           </Box>
-          <Box>
+          <Box sx={{ width: { xs: "100%", sm: "70%", md: "45%" } }}>
             <img src={contactLogo} style={{ width: "100%" }} />
           </Box>
         </Box>

@@ -29,11 +29,16 @@ const For = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              flexDirection: { xs: "column", md: "row" },
             }}
           >
             <Typography
               variant="h3"
-              sx={{ fontSize: "2.5rem", fontWeight: 800 }}
+              sx={{
+                fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
+                fontWeight: 800,
+                marginBottom: { xs: ".5em", md: "0" },
+              }}
             >
               <span style={{ color: "#2085BE" }}>ConnectED</span> For:
             </Typography>
@@ -67,10 +72,18 @@ const For = () => {
                 },
               }}
             >
-              <ToggleButton value="providers" disableRipple>
+              <ToggleButton
+                value="providers"
+                disableRipple
+                sx={{ fontSize: { xs: ".7rem", md: ".8rem" } }}
+              >
                 Information Providers
               </ToggleButton>
-              <ToggleButton value="citizens" disableRipple>
+              <ToggleButton
+                value="citizens"
+                disableRipple
+                sx={{ fontSize: { xs: ".7rem", md: ".8rem" } }}
+              >
                 For Citizens
               </ToggleButton>
             </ToggleButtonGroup>
@@ -80,8 +93,9 @@ const For = () => {
             sx={{
               backgroundColor: "#025692",
               borderRadius: "40px",
-              padding: "2em 4em",
+              padding: { xs: "2em", md: "2em 4em" },
               marginTop: "2em",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             {view === "citizens" ? (
@@ -90,14 +104,16 @@ const For = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  flexDirection: { xs: "column", md: "row" },
                 }}
               >
-                <Box sx={{ width: "37%" }}>
+                <Box sx={{ width: { xs: "100%", md: "45%", lg: "37%" } }}>
                   <Typography
                     sx={{
-                      fontSize: "2rem",
+                      fontSize: { xs: "1.3rem", md: "1.5rem", lg: "2rem" },
                       fontWeight: 800,
                       marginBottom: ".8em",
+                      color: "#fff",
                     }}
                   >
                     For Citizens
@@ -105,6 +121,8 @@ const For = () => {
                   <Typography
                     sx={{
                       lineHeight: "30px",
+                      color: "#fff",
+                      fontSize: { xs: ".9rem", md: "1rem" },
                     }}
                   >
                     These are individuals who want to access important
@@ -114,7 +132,11 @@ const For = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  <Box sx={{ width: "30em" }}>
+                  <Box
+                    sx={{
+                      width: { xs: "18em", sm: "21em", md: "23em", lg: "30em" },
+                    }}
+                  >
                     <img src={citizensIcon} style={{ width: "100%" }} />
                   </Box>
                 </Box>
@@ -125,14 +147,16 @@ const For = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  flexDirection: { xs: "column", md: "row" },
                 }}
               >
-                <Box sx={{ width: "37%" }}>
+                <Box sx={{ width: { xs: "100%", md: "45%", lg: "37%" } }}>
                   <Typography
                     sx={{
-                      fontSize: "2rem",
+                      fontSize: { xs: "1.3rem", md: "1.5rem", lg: "2rem" },
                       fontWeight: 800,
                       marginBottom: ".8em",
+                      color: "#fff",
                     }}
                   >
                     For Information Providers
@@ -140,6 +164,8 @@ const For = () => {
                   <Typography
                     sx={{
                       lineHeight: "30px",
+                      color: "#fff",
+                      fontSize: { xs: ".9rem", md: "1rem" },
                     }}
                   >
                     These are organizations that have relevant and reliable
@@ -151,7 +177,11 @@ const For = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  <Box sx={{ width: "30em" }}>
+                  <Box
+                    sx={{
+                      width: { xs: "18em", sm: "21em", md: "23em", lg: "30em" },
+                    }}
+                  >
                     <img
                       src={informationProviderIcon}
                       style={{ width: "100%" }}

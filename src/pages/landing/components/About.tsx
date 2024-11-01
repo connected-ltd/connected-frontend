@@ -9,16 +9,32 @@ const About = () => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexDirection: { xs: "column", md: "row" },
         }}
         id="about"
       >
-        <Box sx={{ width: "42%" }}>
-          <Typography variant="h3" sx={{ fontSize: "2.5rem", fontWeight: 800 }}>
+        <Box
+          sx={{
+            width: { xs: "100%", md: "42%" },
+            textAlign: { xs: "center", md: "left" },
+          }}
+        >
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
+              fontWeight: 800,
+            }}
+          >
             About <span style={{ color: "#2085BE" }}>ConnectED</span>
           </Typography>
           <Typography
             variant="body2"
-            sx={{ fontSize: "1rem", margin: "2em 0", lineHeight: "30px" }}
+            sx={{
+              fontSize: { xs: ".9rem", md: "1rem" },
+              margin: "2em 0",
+              lineHeight: "30px",
+            }}
           >
             At its core, ConnectED serves as a centralized digital hub,
             connecting various organizations to a vast network where crucial
@@ -29,7 +45,11 @@ const About = () => {
           </Typography>
           <Typography
             variant="body2"
-            sx={{ fontSize: "1rem", margin: "1em 0", lineHeight: "30px" }}
+            sx={{
+              fontSize: { xs: ".9rem", md: "1rem" },
+              margin: "1em 0",
+              lineHeight: "30px",
+            }}
           >
             This platform goes beyond traditional means of communication by
             incorporating SMS functionality, enabling even those in remote,
@@ -39,7 +59,7 @@ const About = () => {
             bring timely and relevant information to diverse populations.
           </Typography>
         </Box>
-        <Box sx={{ width: "28em" }}>
+        <Box sx={{ width: { xs: "18em", sm: "22em", md: "28em" } }}>
           <img src={aboutIcon} style={{ width: "100%" }} />
         </Box>
       </Box>

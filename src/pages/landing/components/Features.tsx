@@ -7,13 +7,23 @@ import contentIcon from "../../../assets/icons/content-icon.svg";
 const Features = () => {
   return (
     <Box sx={{ marginTop: "5em" }}>
-      <Box id="services">
-        <Typography variant="h3" sx={{ fontSize: "2.5rem", fontWeight: 800 }}>
+      <Box id="services" sx={{ textAlign: { xs: "center", md: "left" } }}>
+        <Typography
+          variant="h3"
+          sx={{
+            fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
+            fontWeight: 800,
+          }}
+        >
           Our <span style={{ color: "#2085BE" }}>Features</span>
         </Typography>
         <Typography
           variant="body2"
-          sx={{ fontSize: "1rem", margin: "1em 0", lineHeight: "30px" }}
+          sx={{
+            fontSize: { xs: ".9rem", md: "1rem" },
+            margin: "1em 0",
+            lineHeight: "30px",
+          }}
         >
           ConnectED offers the following features to enhance the knowledge and
           connectivity of its users
@@ -21,9 +31,14 @@ const Features = () => {
         <Box>
           <Grid2 container spacing={2}>
             {featureCards.map((card) => (
-              <Grid2 size={6} key={card.id}>
+              <Grid2
+                size={{ xs: 12, md: 6 }}
+                key={card.id}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
                 <Box
                   sx={{
+                    maxWidth: "500px",
                     backgroundColor: "#025692",
                     padding: "2.5em",
                     borderRadius: "24px",
@@ -31,16 +46,18 @@ const Features = () => {
                     alignItems: "start",
                     gap: 2,
                     height: "100%",
+                    textAlign: "left",
+                    flexDirection: { xs: "column", md: "row" },
                   }}
                 >
-                  <Box sx={{ width: "9em" }}>
+                  <Box sx={{ width: { xs: "2.5em", md: "9em" } }}>
                     <img src={card.icon} style={{ width: "100%" }} />
                   </Box>
                   <Box>
                     <Typography
                       variant="body2"
                       sx={{
-                        fontSize: "1.3rem",
+                        fontSize: { xs: "1rem", md: "1.3rem" },
                         lineHeight: "30px",
                         fontWeight: 700,
                         marginBottom: "1em",
@@ -53,7 +70,7 @@ const Features = () => {
                     <Typography
                       variant="body2"
                       sx={{
-                        fontSize: "1rem",
+                        fontSize: { xs: ".8rem", md: "1rem" },
                         lineHeight: "22px",
                         color: "#fff",
                       }}
