@@ -34,7 +34,10 @@ const Features = () => {
               <Grid2
                 size={{ xs: 12, md: 6 }}
                 key={card.id}
-                sx={{ display: "flex", justifyContent: "center" }}
+                sx={{
+                  display: { xs: "flex", md: "block" },
+                  justifyContent: "center",
+                }}
               >
                 <Box
                   sx={{

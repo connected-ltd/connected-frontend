@@ -191,10 +191,30 @@ const Footer = () => {
 };
 
 const socialList = [
-  { id: 1, name: "Connectedai", link: "#", icon: facebookIcon },
-  { id: 2, name: "connected_ai", link: "#", icon: twitterIcon },
-  { id: 3, name: "ConnectED", link: "#", icon: linkedinIcon },
-  { id: 4, name: "connected_ai", link: "#", icon: instagramIcon },
+  {
+    id: 1,
+    name: "Connectedai",
+    link: "https://www.facebook.com/profile.php?id=61557326654563&mibextid=LQQJ4d",
+    icon: facebookIcon,
+  },
+  {
+    id: 2,
+    name: "connected_ai",
+    link: "https://x.com/connected_ai",
+    icon: twitterIcon,
+  },
+  {
+    id: 3,
+    name: "ConnectED",
+    link: "https://www.linkedin.com/company/connected-ai/",
+    icon: linkedinIcon,
+  },
+  {
+    id: 4,
+    name: "connected_ai",
+    link: "https://www.instagram.com/connected_ai?igsh=MTgxMmZtcDluZGVmcw%3D%3D&utm_source=qr",
+    icon: instagramIcon,
+  },
 ];
 
 export default Footer;
