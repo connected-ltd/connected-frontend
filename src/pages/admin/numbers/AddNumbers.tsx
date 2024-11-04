@@ -11,7 +11,10 @@ import * as yup from "yup";
 import { ArrowRightAlt } from "@mui/icons-material";
 import { useState } from "react";
 import { NumbersInput } from "../../../types/number.types";
-import { useCreateNumbersMutation, useGetAreasQuery } from "../statsApiSlice";
+import {
+  useCreateNumbersMutation,
+  useGetAreasQuery,
+} from "../admin-api/statsApiSlice";
 import CustomSuccessModal from "../../../custom-components/CustomSuccessModal";
 import { FilledButton } from "../../../custom-components/styled/styledButtons";
 import { StyledTextField } from "../../../custom-components/styled/styledInputs";

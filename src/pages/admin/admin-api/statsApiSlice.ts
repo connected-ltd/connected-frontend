@@ -1,6 +1,10 @@
-import { connectedApiSlice } from "../../app/connectedApiSlice";
-import { Areas } from "../../types/areas.types";
-import { Numbers, NumbersInput, NumberStats } from "../../types/number.types";
+import { connectedApiSlice } from "../../../app/connectedApiSlice";
+import { Areas } from "../../../types/areas.types";
+import {
+  Numbers,
+  NumbersInput,
+  NumberStats,
+} from "../../../types/number.types";
 
 const apiSliceWithTags = connectedApiSlice.enhanceEndpoints({
   addTagTypes: ["numbers", "areas"],
