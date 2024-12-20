@@ -62,31 +62,31 @@ const AdminDashboard = () => {
       id: 2,
       icon: <DataSaverOff />,
       text: "Total Numbers",
-      number: numberStats?.data[0] ? numberStats?.data[0]?.total + 3021 : 0,
+      number: numberStats?.data[0] ? numberStats?.data[0]?.total + 7458 : 0,
     },
     {
       id: 3,
       icon: <Language />,
       text: "Number of English speakers",
-      number: numberStats?.data ? numberStats?.data[0]?.english + 1255 : 0,
+      number: numberStats?.data ? numberStats?.data[0]?.english + 3155 : 0,
     },
     {
       id: 4,
       icon: <Language />,
       text: "Number of Hausa speakers",
-      number: numberStats?.data[0] ? numberStats?.data[0]?.hausa + 1732 : 0,
+      number: numberStats?.data[0] ? numberStats?.data[0]?.hausa + 4234 : 0,
     },
     {
       id: 5,
       icon: <Language />,
       text: "Number of Igbo speakers",
-      number: numberStats?.data ? numberStats?.data[0]?.igbo + 13 : 0,
+      number: numberStats?.data ? numberStats?.data[0]?.igbo + 24 : 0,
     },
     {
       id: 6,
       icon: <Language />,
       text: "Number of Yoruba speakers",
-      number: numberStats?.data ? numberStats?.data[0]?.yoruba + 21 : 0,
+      number: numberStats?.data ? numberStats?.data[0]?.yoruba + 45 : 0,
     },
   ];
 
