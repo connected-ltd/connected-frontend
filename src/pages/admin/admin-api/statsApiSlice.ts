@@ -1,5 +1,5 @@
 import { connectedApiSlice } from "../../../app/connectedApiSlice";
-import { Areas } from "../../../types/areas.types";
+import { Areas, AreasStats } from "../../../types/areas.types";
 import {
   Numbers,
   NumbersInput,
@@ -33,6 +33,13 @@ const QuestionApiSlice = apiSliceWithTags.injectEndpoints({
       query: () => "/numbers/stats",
       providesTags: ["numbers"],
     }),
+    getAreaStats: builder.query<
+      { message: string; data: AreasStats; status: string },
+      void
+    >({
+      query: () => "/areas/stats",
+      providesTags: ["numbers"],
+    }),
     createNumbers: builder.mutation<Numbers[], NumbersInput>({
       query: (values) => ({
         url: "/numbers",
@@ -48,5 +55,6 @@ export const {
   useGetAreasQuery,
   useGetNumbersQuery,
   useGetNumbersStatsQuery,
+  useGetAreaStatsQuery,
   useCreateNumbersMutation,
 } = QuestionApiSlice;

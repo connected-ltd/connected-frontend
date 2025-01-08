@@ -5,11 +5,13 @@ import {
   useGetNumbersStatsQuery,
 } from "../admin-api/statsApiSlice";
 import { DataSaverOff, Language, Map } from "@mui/icons-material";
+import AreaStatsCharts from "./component/AreaStatsCharts";
 
 const AdminDashboard = () => {
   const { data: areas, isLoading: isFetchingAreas } = useGetAreasQuery();
   const { data: numberStats, isLoading: isFetchingNumberStats } =
     useGetNumbersStatsQuery();
+
   const totalAreas = areas?.data.length;
 
   // const overviewCard = [
@@ -139,6 +141,9 @@ const AdminDashboard = () => {
             </Typography>
           </Box>
         ))}
+      </Box>
+      <Box sx={{ marginTop: "1em" }}>
+        <AreaStatsCharts />
       </Box>
     </Box>
   );
