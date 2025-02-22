@@ -79,7 +79,6 @@ const AddNumbers = () => {
               labelId="area_id"
               value={formik.values.area_id}
               onChange={formik.handleChange}
-              placeholder="area_id"
               fullWidth
               label="area_id"
               sx={{
@@ -124,7 +123,6 @@ const AddNumbers = () => {
               labelId="language"
               value={formik.values.language}
               onChange={formik.handleChange}
-              placeholder="Language"
               fullWidth
               label="language"
               sx={{
