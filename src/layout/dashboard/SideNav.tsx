@@ -11,13 +11,13 @@ import { logout } from "../../pages/auth/authSlice";
 //icons
 import connectedLogoLight from "../../assets/icons/connected-logo-light.svg";
 import connectedLogoDark from "../../assets/icons/connected-logo-dark.svg";
-import SideOverview from "../../assets/icons/side-overview.svg?react";
+// import SideOverview from "../../assets/icons/side-overview.svg?react";
 // import SideNotes from "../assets/icons/side-notes.svg?react";
 // import sideQUiz from "../assets/icons/side-quiz.svg?react";
 // import sideQuestions from "../assets/icons/side-question.svg?react";
 // import sideMedia from "../assets/icons/side-media.svg?react";
 // import sideReview from "../assets/icons/side-review.svg?react";
-import { Add, KeyboardArrowLeft } from "@mui/icons-material";
+import { Add, Dashboard, KeyboardArrowLeft } from "@mui/icons-material";
 import { FilledButton } from "../../custom-components/styled/styledButtons";
 import { useThemeContext } from "../../styles/ThemeContext";
 
@@ -45,7 +45,7 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
   const navItems = [
     {
       text: "Dashboard",
-      icon: SideOverview,
+      icon: Dashboard,
       link: "/dashboard",
     },
     {
