@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import Auth from "../pages/auth/Auth";
 import Layout from "../layout/dashboard/Layout";
-import Login from "../pages/auth/Login";
 import { useSelector } from "react-redux";
 import { login, selectCurrentUser } from "../pages/auth/authSlice";
 import { useAppDispatch } from "../app/hooks";
@@ -59,7 +59,7 @@ const Router = () => {
 
       dispatch(login({ data, access_token, refresh_token }));
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     //route the user to dashboard, if a logged in user tries to access signin page
@@ -76,7 +76,7 @@ const Router = () => {
       <Route element={<NoNav />}>
         {/* public routes that dont have the sidebar nav */}
         <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Auth />} />
         <Route path="*" element={<h1>Url does not match</h1>} />
         {/*
          Landing page routing below 
@@ -98,7 +98,7 @@ const Router = () => {
           <Route path="/add-number" element={<AddNumbers />} />
         </Route>
       ) : (
-        // Student route
+        // Organization route
         <Route
           //protected pages
           element={

@@ -1,21 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Nunito", sans-serif;
-} */
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: oklch(1 0 0);
+  /* --background: oklch(1 0 0); */
+  --background: var(--color-bg-primary);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  /* --primary: oklch(0.205 0 0); */
+  --primary: var(--primary);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -42,6 +41,32 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.87 0 0);
+
+  @theme {
+    --color-primary: #025692;
+
+    --color-accent: #9ca9bb;
+    --color-card: #ffffff;
+    --color-bg-primary: #ffffff;
+    --color-bg-primary-dark: #14324c;
+    --color-border-primary: #e7e7e7;
+    --color-card-dark: #0c0c0c;
+    --color-chat-box: #111111;
+    --color-card-light: #1f1f1f;
+
+    --color-text-primary: #1e1e1e;
+    --color-text-secondary: red;
+
+    --font-size-2xl: 1.25rem;
+    --font-size-4xl: 2.5rem;
+
+    --font-lexend: "Lexend", "sans-serif";
+    --font-family-sans: "Nunito", sans-serif;
+    --font-family-inter: "Nunito", sans-serif;
+
+    --grid-cols-profile: 1fr 3fr;
+    --height-vp: calc(100vh - 108px);
+  }
 }
 
 .dark {
@@ -77,6 +102,30 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  /*  */
+
+  --color-primary: #1976d2;
+  --color-accent: #9ca9bb;
+  --color-card: #14324c;
+  --color-bg-primary: #14324c;
+  --color-bg-primary-dark: #14324c;
+  --color-border-primary: #374151;
+  --color-card-dark: #0c0c0c;
+  --color-chat-box: #111111;
+  --color-card-light: #1f1f1f;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+
+  --font-size-2xl: 1.25rem;
+  --font-size-4xl: 2.5rem;
+
+  --font-family-sans: "Nunito", sans-serif;
+  --font-family-inter: "Nunito", sans-serif;
+
+  --grid-cols-profile: 1fr 3fr;
+  --height-vp: calc(100vh - 108px);
+  /*  */
 }
 
 @theme inline {
@@ -119,58 +168,32 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  h1 {
+    font-size: var(--text-4xl);
+    font-family: "Lexend", sans-serif;
   }
-  body {
-    @apply bg-background text-foreground;
+  h2 {
+    font-size: var(--text-3xl);
+    font-family: "Lexend", sans-serif;
   }
-}
-
-@theme {
-  --color-primary: #025692;
-  --color-accent: #9ca9bb;
-  --color-card: #ffffff;
-  --color-bg-primary: #ffffff;
-  --color-border-primary: #e7e7e7;
-  --color-card-dark: #0c0c0c;
-  --color-chat-box: #111111;
-  --color-card-light: #1f1f1f;
-
-  --color-text-primary: #1e1e1e;
-  --color-text-secondary: red;
-
-  --font-size-2xl: 1.25rem;
-  --font-size-4xl: 2.5rem;
-
-  --font-family-sans: "Nunito", sans-serif;
-  --font-family-inter: "Nunito", sans-serif;
-
-  --grid-cols-profile: 1fr 3fr;
-  --height-vp: calc(100vh - 108px);
-}
-
-.dark {
-  @theme {
-    --color-primary: #1976d2;
-    --color-accent: #9ca9bb;
-    --color-card: #14324c;
-    --color-bg-primary: #14324c;
-    --color-border-primary: #374151;
-    --color-card-dark: #0c0c0c;
-    --color-chat-box: #111111;
-    --color-card-light: #1f1f1f;
-
-    --color-text-primary: #ffffff;
-    --color-text-secondary: rgba(255, 255, 255, 0.7);
-
-    --font-size-2xl: 1.25rem;
-    --font-size-4xl: 2.5rem;
-
-    --font-family-sans: "Nunito", sans-serif;
-    --font-family-inter: "Nunito", sans-serif;
-
-    --grid-cols-profile: 1fr 3fr;
-    --height-vp: calc(100vh - 108px);
+  h3 {
+    font-size: var(--text-2xl);
+    font-family: "Lexend", sans-serif;
+  }
+  h4 {
+    font-size: var(--text-xl);
+    font-family: "Lexend", sans-serif;
+  }
+  h5 {
+    font-size: var(--text-lg);
+    font-family: "Lexend", sans-serif;
+  }
+  h6 {
+    font-size: var(--text-base);
+    font-family: "Lexend", sans-serif;
+  }
+  p {
+    font-size: var(--text-base);
+    font-family: "Lexend", sans-serif;
   }
 }
