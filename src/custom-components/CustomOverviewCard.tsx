@@ -1,51 +1,22 @@
-import { Box, Typography } from "@mui/material";
+import React from "react";
 type Props = {
   key?: string | number;
   onClick: () => void;
   title: string;
-  icon: string;
+  icon: React.ReactNode;
 };
 
 const CustomOverviewCard = ({ onClick, title, icon }: Props) => {
   return (
-    <Box
-      sx={{
-        backgroundColor: "#fff",
-        padding: "2em 1.5em",
-        width: "100%",
-        minWidth: "18.2em",
-        borderRadius: "6px",
-        cursor: "pointer",
-      }}
+    <div
+      className="bg-bg-primary px-8 py-6 w-full min-w-[18.2em] rounded-xl cursor-pointer"
       onClick={onClick}
     >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          sx={{
-            padding: ".5em .7em",
-            backgroundColor: "#F4F6FAB2",
-            borderRadius: "10px",
-            marginBottom: ".5em",
-            width: "3em",
-          }}
-        >
-          <img src={icon} alt="" style={{ width: "100%" }} />
-        </Box>
-        <Typography
-          variant="body2"
-          sx={{ fontSize: { xs: ".9rem", md: "1rem" }, fontWeight: 500 }}
-        >
-          {title}
-        </Typography>
-      </Box>
-    </Box>
+      <div className="flex justify-between items-center">
+        <p className="text-sm md:text-base font-medium w-1/4">{title}</p>
+        <div className="px-1 py-2 rounded-2xl mb-2 w-12">{icon}</div>
+      </div>
+    </div>
   );
 };
 

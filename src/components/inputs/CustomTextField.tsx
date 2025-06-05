@@ -31,7 +31,7 @@ const CustomTextField = ({
 
   return (
     <div className={`${className}`}>
-      <label htmlFor={label} className="text-base">
+      <label htmlFor={label} className="text-base text-text-primary">
         {label}
       </label>
       <div className="relative w-full my-1">
@@ -42,7 +42,7 @@ const CustomTextField = ({
           value={value}
           disabled={disabled}
           {...register}
-          className={`border border-[#E2E8F0] rounded w-full p-4 text-sm h-10 focus:border-primary focus:border-2 focus:outline-none`}
+          className={`border border-[#E2E8F0] text-text-primary rounded w-full p-4 text-sm h-10 focus:border-primary focus:border-2 focus:outline-none`}
         />
         {checkPassword && (
           <Button
