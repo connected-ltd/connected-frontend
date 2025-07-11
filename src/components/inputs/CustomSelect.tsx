@@ -7,6 +7,7 @@ interface CustomSelectProps {
   options: Array<{ name: string; value: string }>;
   errorMessage?: FieldError | undefined;
   className?: string;
+  disabled?: boolean;
 }
 
 const CustomSelect = ({
@@ -15,6 +16,7 @@ const CustomSelect = ({
   options,
   errorMessage,
   className,
+  disabled,
 }: CustomSelectProps) => {
   return (
     <div className={`${className}`}>
@@ -26,6 +28,7 @@ const CustomSelect = ({
         {...register}
         id={label}
         className={`border border-black/10 rounded w-full py-2 px-3 text-sm h-10`}
+        disabled={disabled}
       >
         <option defaultValue="" disabled>
           Select an option

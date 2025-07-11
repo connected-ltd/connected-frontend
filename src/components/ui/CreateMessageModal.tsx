@@ -9,6 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import CustomTextField from "../inputs/CustomTextField";
+import { useGetAreasQuery } from "@/pages/admin/admin-api/statsApiSlice";
+import CustomSelect from "../inputs/CustomSelect";
+import { Button } from "./button";
 
 interface CreateMessageModalProps {
   open: boolean;
@@ -28,10 +31,7 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
   });
 
   const { showToast } = useToast();
-
-  // const dispatch = useDispatch();
-
-  // const [loginRequest] = useLoginMutation();
+  const { data: areas, isLoading } = useGetAreasQuery();
 
   const onSubmit: SubmitHandler<CreateMessageSchema> = async (data) => {
     try {
@@ -70,22 +70,40 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
             errorMessage={errors.shortcode}
             className="my-2"
           />
+
+          <CustomTextField
+            label="Message"
+            placeholder="xxxxx"
+            register={register("message")}
+            errorMessage={errors.message}
+            className="my-2"
+          />
+
+          <CustomSelect
+            label="Area"
+            register={register("area")}
+            errorMessage={errors.area}
+            className="my-2"
+            options={
+              areas?.data.map((area) => ({
+                name: area.name,
+                value: String(area.id),
+              })) || []
+            }
+            disabled={isLoading}
+          />
         </div>
         <div className="flex justify-end gap-2">
-          <button
-            className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
-            onClick={onClose}
+          <Button
+            className="mt-2 w-full"
+            type="submit"
+            variant={"default"}
+            size={"default"}
+            loading={isSubmitting}
+            disabled={isSubmitting}
           >
-            Cancel
-          </button>
-          <button
-            className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
-            onClick={() => {
-              setMessage("");
-            }}
-          >
-            Submit
-          </button>
+            Send Message
+          </Button>
         </div>
       </div>
     </div>
