@@ -8,10 +8,15 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
-import CustomTextField from "../inputs/CustomTextField";
-import { useGetAreasQuery } from "@/pages/admin/admin-api/statsApiSlice";
+import {
+  useGetAreasQuery,
+  useGetShortcodesQuery,
+} from "@/pages/admin/admin-api/statsApiSlice";
 import CustomSelect from "../inputs/CustomSelect";
 import { Button } from "./button";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/pages/auth/authSlice";
+import CustomTextArea from "../inputs/CustomTextArea";
 
 interface CreateMessageModalProps {
   open: boolean;
@@ -31,13 +36,19 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
   });
 
   const { showToast } = useToast();
-  const { data: areas, isLoading } = useGetAreasQuery();
+  const userId = useSelector(selectCurrentUser)?.id;
+  const { data: areas, isLoading: isFetchingAreas } = useGetAreasQuery();
+  const { data: shortcodes, isLoading: isFetchingShortcodes } =
+    useGetShortcodesQuery();
 
   const onSubmit: SubmitHandler<CreateMessageSchema> = async (data) => {
     try {
-      // const userData = await loginRequest(data).unwrap();
-      // dispatch(login(userData));
-      console.log("Message data:", data);
+      const body = {
+        ...data,
+        user_id: userId,
+      };
+      console.log("Message data:", body);
+      onClose();
       showToast("Message sent successfully", "success");
       // navigate("/lesson-plans");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,7 +58,6 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
       showToast("Something went wrong", "error");
     }
   };
-  const [message, setMessage] = React.useState("");
 
   if (!open) return null;
 
@@ -62,49 +72,62 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
             <X className="text-text-primary" />
           </button>
         </div>
-        <div>
-          <CustomTextField
-            label="Shortcode"
-            placeholder="xxxxx"
-            register={register("shortcode")}
-            errorMessage={errors.shortcode}
-            className="my-2"
-          />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full max-w-md py-4"
+        >
+          <div>
+            <div>
+              <CustomSelect
+                label="Shortcode"
+                register={register("shortcode")}
+                errorMessage={errors.shortcode}
+                className="my-2"
+                options={
+                  shortcodes?.data.map((code) => ({
+                    name: code.shortcode,
+                    value: String(code.id),
+                  })) || []
+                }
+                disabled={isFetchingShortcodes}
+              />
 
-          <CustomTextField
-            label="Message"
-            placeholder="xxxxx"
-            register={register("message")}
-            errorMessage={errors.message}
-            className="my-2"
-          />
+              <CustomTextArea
+                label="Message"
+                placeholder="Type your message here"
+                register={register("message")}
+                errorMessage={errors.message}
+                className="my-2"
+              />
 
-          <CustomSelect
-            label="Area"
-            register={register("area")}
-            errorMessage={errors.area}
-            className="my-2"
-            options={
-              areas?.data.map((area) => ({
-                name: area.name,
-                value: String(area.id),
-              })) || []
-            }
-            disabled={isLoading}
-          />
-        </div>
-        <div className="flex justify-end gap-2">
-          <Button
-            className="mt-2 w-full"
-            type="submit"
-            variant={"default"}
-            size={"default"}
-            loading={isSubmitting}
-            disabled={isSubmitting}
-          >
-            Send Message
-          </Button>
-        </div>
+              <CustomSelect
+                label="Area"
+                register={register("area")}
+                errorMessage={errors.area}
+                className="my-2"
+                options={
+                  areas?.data.map((area) => ({
+                    name: area.name,
+                    value: String(area.id),
+                  })) || []
+                }
+                disabled={isFetchingAreas}
+              />
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button
+                className="mt-2 w-full"
+                type="submit"
+                variant={"default"}
+                size={"default"}
+                loading={isSubmitting}
+                disabled={isSubmitting}
+              >
+                Send Message
+              </Button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

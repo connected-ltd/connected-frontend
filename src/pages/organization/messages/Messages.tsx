@@ -65,11 +65,6 @@ const Messages = () => {
 
   const handleModalClose = () => setModalOpen(false);
 
-  const handleModalSubmit = (message: string) => {
-    console.log("New message:", message);
-    setModalOpen(false);
-  };
-
   const customActions = (
     <button className="text-gray-500 hover:text-gray-700">
       <Trash size={18} />
@@ -78,11 +73,7 @@ const Messages = () => {
 
   return (
     <div>
-      <CreateMessageModal
-        open={modalOpen}
-        onClose={handleModalClose}
-        onSubmit={handleModalSubmit}
-      />
+      <CreateMessageModal open={modalOpen} onClose={handleModalClose} />
       <div>
         <h2 className="font-semibold">Messages</h2>
         <p className="text-[#71717A] dark:text-[#5a5a5f]">
