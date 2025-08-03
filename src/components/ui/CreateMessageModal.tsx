@@ -1,6 +1,5 @@
 import React from "react";
-
-import { X } from "lucide-react";
+import { Info, X } from "lucide-react";
 import {
   createMessageSchema,
   CreateMessageSchema,
@@ -17,6 +16,7 @@ import { Button } from "./button";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/pages/auth/authSlice";
 import CustomTextArea from "../inputs/CustomTextArea";
+import { useCreateBroadcastMutation } from "@/pages/organization/organization-api/messagesApiSlice";
 
 interface CreateMessageModalProps {
   open: boolean;
@@ -33,6 +33,11 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
     formState: { errors, isSubmitting },
   } = useForm<CreateMessageSchema>({
     resolver: zodResolver(createMessageSchema),
+    defaultValues: {
+      shortcode_id: "",
+      area_id: "",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any,
   });
 
   const { showToast } = useToast();
@@ -40,6 +45,7 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
   const { data: areas, isLoading: isFetchingAreas } = useGetAreasQuery();
   const { data: shortcodes, isLoading: isFetchingShortcodes } =
     useGetShortcodesQuery();
+  const [sendBroadcast] = useCreateBroadcastMutation();
 
   const onSubmit: SubmitHandler<CreateMessageSchema> = async (data) => {
     try {
@@ -47,13 +53,10 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
         ...data,
         user_id: userId,
       };
-      console.log("Message data:", body);
-      onClose();
+      await sendBroadcast(body).unwrap();
       showToast("Message sent successfully", "success");
-      // navigate("/lesson-plans");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      // alert("something went wrong");
+      onClose();
+    } catch (error) {
       console.error("Error sending message:", error);
       showToast("Something went wrong", "error");
     }
@@ -80,13 +83,15 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
             <div>
               <CustomSelect
                 label="Shortcode"
-                register={register("shortcode")}
-                errorMessage={errors.shortcode}
+                register={register("shortcode_id", {
+                  valueAsNumber: true,
+                })}
+                errorMessage={errors.shortcode_id}
                 className="my-2"
                 options={
                   shortcodes?.data.map((code) => ({
                     name: code.shortcode,
-                    value: String(code.id),
+                    value: code.id,
                   })) || []
                 }
                 disabled={isFetchingShortcodes}
@@ -102,18 +107,31 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
 
               <CustomSelect
                 label="Area"
-                register={register("area")}
-                errorMessage={errors.area}
+                register={register("area_id", {
+                  valueAsNumber: true,
+                })}
+                errorMessage={errors.area_id}
                 className="my-2"
                 options={
                   areas?.data.map((area) => ({
                     name: area.name,
-                    value: String(area.id),
+                    value: area.id,
                   })) || []
                 }
                 disabled={isFetchingAreas}
               />
             </div>
+
+            <div className="mt-2 p-2 rounded-sm bg-[#F0F9FF] w-full flex items-center gap-3">
+              <Info className="text-[#0369A1]" />
+              <div>
+                <p className="text-xs text-[#0369A1]">
+                  Your broadcast will be sent to 1,367,890 people. You will
+                  charged 30 units for this. Learn More
+                </p>
+              </div>
+            </div>
+
             <div className="flex justify-end gap-2">
               <Button
                 className="mt-2 w-full"

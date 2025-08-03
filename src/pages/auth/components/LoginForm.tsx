@@ -31,7 +31,8 @@ const LoginForm = () => {
     } catch (error: any) {
       if (error.status === 401 || error.status === 404) {
         // alert("Incorrect username or passsord");
-        showToast("Incorrect username or passsord", "error");
+        // showToast("Incorrect username or passsord", "error");
+        showToast(error.data.message, "error");
       } else {
         // alert("something went wrong");
         showToast("something went wrong", "error");

@@ -43,7 +43,7 @@ const baseQueryWithErrorHandling: BaseQueryFn<
 
   if (result.error && result.error.status === 401) {
     //log the user out if refresh token isnt found
-    alert("Session expired, Please signin to continue");
+    // alert("Session expired, Please signin to continue");
     api.dispatch(logout()); // logout user
   }
 
@@ -61,7 +61,15 @@ export const authApiSlice = createApi({
         body: { ...values },
       }),
     }),
+
+    register: builder.mutation({
+      query: (values) => ({
+        url: "/register",
+        method: "POST",
+        body: { ...values },
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation } = authApiSlice;

@@ -8,6 +8,7 @@ import {
   Check,
   ChevronDown,
 } from "lucide-react";
+import LinearProgress from "@/components/ui/LinearProgress";
 
 // TypeScript interface for table data
 interface TableRow {
@@ -31,12 +32,14 @@ interface CustomTableProps {
   actions?: React.ReactNode;
   onCreateNew?: () => void;
   onCustomizeTable?: () => void;
+  isFetching?: boolean;
 }
 
 const CustomTable: React.FC<CustomTableProps> = ({
   columns,
   data,
   actions,
+  isFetching,
 }) => {
   // States
   const [tableData, setTableData] = useState<TableRow[]>(data);
@@ -213,13 +216,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
       ))}
 
       {/* Actions */}
-      <div className="py-4 px-4 text-right">
-        {actions || (
-          <button className="text-text-primary hover:text-text-primary">
-            <Trash size={18} />
-          </button>
-        )}
-      </div>
+      <div className="py-4 px-4 text-right">{actions || <span></span>}</div>
     </div>
   );
 
@@ -414,6 +411,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
 
       {/* Table */}
       <div className="border border-border-primary rounded-sm overflow-hidden">
+        {isFetching && (
+          <div className="mb-2">
+            <LinearProgress />
+          </div>
+        )}
         {/* Table Header */}
         <div className="grid grid-cols-12 bg-bg-primary border-b border-border-primary">
           {/* Checkbox Header */}
@@ -436,7 +438,6 @@ const CustomTable: React.FC<CustomTableProps> = ({
               className="h-4 w-4 text-primary rounded border-border-primary focus:ring-primary"
             />
           </div>
-
           {/* Column Headers - Adjusted for checkbox */}
           {columns.map((column, index) => (
             <div
@@ -454,11 +455,12 @@ const CustomTable: React.FC<CustomTableProps> = ({
               {column.header}
             </div>
           ))}
-
           {/* Actions Header */}
-          <div className="py-3 px-4 font-medium text-text-primary text-right">
-            Actions
-          </div>
+          {actions && (
+            <div className="py-3 px-4 font-medium text-text-primary text-right">
+              Actions
+            </div>
+          )}
         </div>
 
         {/* Table Body */}
