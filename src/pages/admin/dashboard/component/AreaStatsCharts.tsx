@@ -71,21 +71,20 @@ const AreaStatsCharts: React.FC = () => {
     ],
   };
 
-  const hardcodedLanguageCounts = {
-    hausa: 4598,
-    english: 3395,
-    igbo: 25,
-    yoruba: 47,
-  };
+  // Aggregate language counts from API data
+  const languageCounts: Record<string, number> = {};
+  statistics.forEach((stat) => {
+    stat.languages.forEach((lang) => {
+      languageCounts[lang] = (languageCounts[lang] || 0) + stat.number_count;
+    });
+  });
 
-  // Total count for calculating percentages
-  const totalLanguageCount = Object.values(hardcodedLanguageCounts).reduce(
+  const totalLanguageCount = Object.values(languageCounts).reduce(
     (acc, count) => acc + count,
     0
   );
 
-  // Calculate percentages for each language
-  const normalizedPercentages = Object.entries(hardcodedLanguageCounts).map(
+  const normalizedPercentages = Object.entries(languageCounts).map(
     ([key, count]) => ({
       label: key,
       percentage: totalLanguageCount
