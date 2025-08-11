@@ -52,6 +52,7 @@ const Footer = () => {
                   textDecoration: "none",
                   // margin: ".8em 0",
                 }}
+                key={social.id}
               >
                 <Box sx={{ width: "2.5em" }}>
                   <img src={social.icon} style={{ width: "100%" }} />

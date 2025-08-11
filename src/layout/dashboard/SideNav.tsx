@@ -1,25 +1,22 @@
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Box, useTheme, Typography, SvgIcon, IconButton } from "@mui/material";
-import { useDispatch } from "react-redux";
-import React from "react";
-import { logout } from "../../pages/auth/authSlice";
-//icons
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectCurrentUser } from "../../pages/auth/authSlice";
+import { Button } from "@/components/ui/button";
+import {
+  LayoutDashboard,
+  Plus,
+  ChevronLeft,
+  FileText,
+  BarChart3,
+  Mail,
+  Settings,
+} from "lucide-react";
+
+// Import your logo assets
 import connectedLogoLight from "../../assets/icons/connected-logo-light.svg";
 import connectedLogoDark from "../../assets/icons/connected-logo-dark.svg";
-// import SideOverview from "../../assets/icons/side-overview.svg?react";
-// import SideNotes from "../assets/icons/side-notes.svg?react";
-// import sideQUiz from "../assets/icons/side-quiz.svg?react";
-// import sideQuestions from "../assets/icons/side-question.svg?react";
-// import sideMedia from "../assets/icons/side-media.svg?react";
-// import sideReview from "../assets/icons/side-review.svg?react";
-import { Add, Dashboard, KeyboardArrowLeft } from "@mui/icons-material";
-import { FilledButton } from "../../custom-components/styled/styledButtons";
-import { useThemeContext } from "../../styles/ThemeContext";
+import sidenavImg from "../../assets/icons/sidenavIcon.svg";
 
 type Props = {
   drawerWidth: number;
@@ -28,12 +25,30 @@ type Props = {
 };
 
 function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
-  const theme = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const [isLoading, setIsLoading] = React.useState(false);
-  const { mode } = useThemeContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const user = useSelector(selectCurrentUser);
+  const sideNavRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside to close mobile drawer
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileOpen &&
+        sideNavRef.current &&
+        !sideNavRef.current.contains(event.target as Node)
+      ) {
+        handleDrawerToggle();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileOpen, handleDrawerToggle]);
 
   const handleLogout = () => {
     setIsLoading(true);
@@ -42,214 +57,177 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
     setIsLoading(false);
   };
 
-  const navItems = [
+  const adminNavItems = [
     {
       text: "Dashboard",
-      icon: Dashboard,
+      icon: LayoutDashboard,
       link: "/dashboard",
     },
     {
       text: "Add Number",
-      icon: Add,
+      icon: Plus,
       link: "/add-number",
     },
-    // {
-    //   text: "Notes",
-    //   icon: SideNotes,
-    //   link: "/notes",
-    // },
-    // {
-    //   text: "Quizzes",
-    //   icon: sideQUiz,
-    //   link: "/quizzes",
-    // },
-    // {
-    //   text: "Questions",
-    //   icon: sideQuestions,
-    //   link: "/questions",
-    // },
-    // {
-    //   text: "Media Library",
-    //   icon: sideMedia,
-    //   link: "/media-library",
-    // },
-    // {
-    //   text: "Reviews",
-    //   icon: sideReview,
-    //   link: "/reviews",
-    // },
   ];
 
+  const organizationNavItems = [
+    {
+      text: "Dashboard",
+      icon: LayoutDashboard,
+      link: "/dashboard",
+    },
+    {
+      text: "Messages",
+      icon: Mail,
+      link: "/messages",
+    },
+    {
+      text: "Files",
+      icon: FileText,
+      link: "/files",
+    },
+    {
+      text: "Analytics",
+      icon: BarChart3,
+      link: "/analytics",
+    },
+    {
+      text: "Settings",
+      icon: Settings,
+      link: "/settings",
+    },
+  ];
+
+  const navItems =
+    user?.role === "admin" ? adminNavItems : organizationNavItems;
+
   const drawer = (
-    <Box sx={{ mx: 3 }}>
-      <Box
-        sx={{
-          margin: "3em 0",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box>
-            <Box sx={{ width: "9.7em" }}>
+    <div className="px-4 h-full overflow-auto">
+      <div className="my-12 flex justify-center items-center flex-col">
+        <div className="flex items-center gap-2 w-full justify-between">
+          <div className="w-full">
+            <div className="w-full flex flex-col justify-center items-center">
               <img
-                src={mode === "light" ? connectedLogoLight : connectedLogoDark}
+                src={connectedLogoDark}
                 alt="connected logo"
-                style={{ width: "100%", height: "auto" }}
+                className="w-3/4 h-auto hidden dark:block"
               />
-            </Box>
-            <Typography
-              variant="body2"
-              sx={{
-                fontSize: "0.75rem",
-                fontWeight: 300,
-                textTransform: "uppercase",
-                marginTop: "1em",
-              }}
-            >
-              Admin dashboard
-            </Typography>
-          </Box>
-          <IconButton
-            onClick={handleDrawerToggle}
-            sx={{ display: { xs: "block", sm: "none" } }}
-          >
-            <KeyboardArrowLeft sx={{ color: "#95969D", cursor: "pointer" }} />
-          </IconButton>
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "85%",
-        }}
-      >
-        <List
-          sx={{
-            "& .MuiTypography-root": {
-              fontSize: "16px",
-              fontWeight: 700,
-              lineHeight: "25px",
-              color: "inherit",
-            },
-            "& a": {
-              color: "#ffffff",
-              textDecoration: "none",
-              borderRadius: "8px",
-              width: "100%",
-            },
-          }}
-        >
-          {navItems.map((item, index) => (
-            <ListItem key={index} disablePadding sx={{ margin: "5px 0" }}>
-              <Box
-                component={NavLink}
-                to={item.link}
-                style={({ isActive }) =>
-                  isActive
-                    ? {
-                        backgroundColor: theme.palette.primary.main,
-                        color: "#fff",
-                        borderRadius: "6px",
-                      }
-                    : {
-                        color: "#6F6F67",
-                      }
-                }
-              >
-                <ListItemButton
-                  onClick={handleDrawerToggle}
-                  sx={{
-                    color: "inherit",
-                    gap: 2,
-                  }}
+              <img
+                src={connectedLogoLight}
+                alt="connected logo"
+                className="w-3/4 h-auto block dark:hidden"
+              />
+            </div>
+            {/* <p className="text-xs font-light uppercase mt-4 text-primary">
+              {user?.role === "admin"
+                ? "Admin dashboard"
+                : "Organization dashboard"}
+            </p> */}
+          </div>
+          <button onClick={handleDrawerToggle} className="block sm:hidden">
+            <ChevronLeft className="text-[#95969D] cursor-pointer" />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between h-[75%]">
+        <ul className="space-y-1">
+          {navItems.map((item, index) => {
+            const isActive = location.pathname.includes(item.link);
+
+            return (
+              <li key={index} className="py-1">
+                <NavLink
+                  to={item.link}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-white block w-full bg-[#025692]"
+                      : "text-primary block w-full"
+                  }
+
+                  // onClick={() => navigate(`${item.link}`)}
                 >
-                  <Box>
-                    {/* <img src={item.icon} alt="" style={{ width: "100%" }} /> */}
-                    <SvgIcon
-                      component={item.icon}
-                      sx={{
-                        color: location.pathname.includes(item.link)
-                          ? "#fff"
-                          : "#6F6F67",
-                      }}
+                  <div
+                    className="flex items-center gap-2 p-3"
+                    onClick={handleDrawerToggle}
+                  >
+                    <item.icon
+                      className={isActive ? "text-white" : "text-[#6F6F67]"}
+                      size={20}
                     />
-                  </Box>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </Box>
-            </ListItem>
-          ))}
-        </List>
-        <FilledButton
-          sx={{
-            width: "100%",
-            borderRadius: "10px",
-          }}
-          type="submit"
-          disabled={isLoading}
-          onClick={handleLogout}
-        >
-          {isLoading ? "Loading..." : "LOGOUT"}
-        </FilledButton>
-      </Box>
-    </Box>
+                    <span
+                      className={`text-base ${
+                        isActive ? "font-bold" : "font-lexend"
+                      }`}
+                    >
+                      {item.text}
+                    </span>
+                  </div>
+                </NavLink>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="flex flex-col gap-2">
+          <div className="bg-[#A2C8E8] dark:bg-[#F6F5F4] w-full p-3 flex items-center gap-3 rounded-xl">
+            <div>
+              <img src={sidenavImg} alt="" className="w-full" />
+            </div>
+            <div>
+              <p className="text-sm text-[#1A1A1A]">Mubarak Ibrahim</p>
+              <p className="text-xs text-[#1A1A1A]">Admin</p>
+            </div>
+          </div>
+
+          <Button
+            className="w-full"
+            disabled={isLoading}
+            onClick={handleLogout}
+          >
+            {isLoading ? "Loading..." : "LOGOUT"}
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 
   return (
-    <Box
-      component="nav"
-      sx={{
-        width: { sm: drawerWidth },
-        flexShrink: { sm: 0 },
-      }}
-    >
-      {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Drawer
-        variant="temporary"
-        open={mobileOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          display: { xs: "block", sm: "none" },
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            background: "white",
-            border: "none",
-          },
-        }}
+    <>
+      {/* Overlay for mobile when drawer is open */}
+      <div
+        className={`
+          fixed inset-0 bg-black/50 z-30 sm:hidden
+          transition-opacity duration-300 ease-in-out
+          ${mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
+        `}
+        aria-hidden="true"
+      />
+
+      <nav
+        style={{ "--drawer-width": `${drawerWidth}px` } as React.CSSProperties}
+        className="sm:w-[var(--drawer-width)] sm:flex-shrink-0"
       >
-        {drawer}
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            background: "white",
-            border: "none",
-          },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer>
-    </Box>
+        {/* Mobile drawer */}
+        <div
+          ref={sideNavRef}
+          className={`
+            fixed inset-y-0 left-0 z-40 
+            w-[var(--drawer-width)] 
+            transform ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
+            transition-transform duration-300 ease-in-out
+            bg-bg-primary border-none
+            block sm:hidden
+          `}
+        >
+          <div className="h-full overflow-y-auto">{drawer}</div>
+        </div>
+
+        {/* Desktop permanent drawer */}
+        <div className="hidden sm:block fixed inset-y-0 left-0 z-40 w-[var(--drawer-width)] bg-bg-primary border-none overflow-y-auto">
+          {drawer}
+        </div>
+      </nav>
+    </>
   );
 }
 

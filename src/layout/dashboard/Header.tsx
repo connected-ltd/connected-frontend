@@ -1,5 +1,6 @@
-import { AppBar, Box, IconButton, Toolbar } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Menu, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 
 type Props = {
   drawerWidth: number;
@@ -7,29 +8,56 @@ type Props = {
 };
 
 function Header({ drawerWidth, handleDrawerToggle }: Props) {
+  // Extract the value for CSS custom properties
+  const cssVars = {
+    "--drawer-width": `${drawerWidth}px`,
+  } as React.CSSProperties;
+
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("themeMode") === "dark";
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("themeMode", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("themeMode", "light");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
+
   return (
-    <AppBar
-      position="fixed"
-      sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` },
-        boxShadow: "none",
-        backgroundColor: "#f1f1f1",
-        borderBottom: "1px solid #e7e7e7",
-      }}
+    <div
+      style={cssVars}
+      className="fixed shadow-none bg-bg-primary border-b border-[#e7e7e7] dark:border-[#A2C8E8] py-2 px-4 w-full sm:w-[calc(100%_-_var(--drawer-width))] sm:ml-[var(--drawer-width)]"
     >
-      <Toolbar>
-        <IconButton
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: "none" } }}
-        >
-          <MenuIcon sx={{ color: "primary.main" }} />
-        </IconButton>
-        <Box sx={{ flexGrow: 1 }}></Box>
-      </Toolbar>
-    </AppBar>
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center justify-between sm:justify-end w-full">
+          <Button
+            className="mr-2 sm:hidden flex justify-center items-center"
+            variant="default"
+            size="icon"
+            onClick={handleDrawerToggle}
+          >
+            <Menu />
+          </Button>
+          <Button
+            className="mr-2 flex justify-center items-center"
+            variant="default"
+            size="icon"
+            onClick={toggleDarkMode}
+          >
+            <Sun />
+          </Button>
+        </div>
+        <div className="flex-grow"></div>
+      </div>
+    </div>
   );
 }
 

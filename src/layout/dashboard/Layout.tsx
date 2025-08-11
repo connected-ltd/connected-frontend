@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { useState } from "react";
 import Main from "./Main";
 import SideNav from "./SideNav";
+import Header from "./Header";
 
 function Layout() {
   const drawerWidth = 265;
@@ -12,11 +13,10 @@ function Layout() {
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* <Header
+      <Header
         drawerWidth={drawerWidth}
         handleDrawerToggle={handleDrawerToggle}
       />
-     */}
 
       <SideNav
         drawerWidth={drawerWidth}
@@ -24,7 +24,7 @@ function Layout() {
         mobileOpen={mobileOpen}
       />
 
-      <Main handleDrawerToggle={handleDrawerToggle} drawerWidth={drawerWidth} />
+      <Main drawerWidth={drawerWidth} />
     </Box>
   );
 }
