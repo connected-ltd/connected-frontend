@@ -6,14 +6,17 @@ import "./index.css";
 import { Provider } from "react-redux";
 import store from "./app/store.ts";
 import { BrowserRouter } from "react-router-dom";
+import { ToastProvider } from "@/context/ToastContext";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.Fragment>
-    <Provider store={store}>
-      <BrowserRouter future={{ v7_startTransition: true }}>
-        <CssBaseline />
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.Fragment>
+  <React.StrictMode>
+    <ToastProvider>
+      <Provider store={store}>
+        <BrowserRouter future={{ v7_startTransition: true }}>
+          <CssBaseline />
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </ToastProvider>
+  </React.StrictMode>
 );

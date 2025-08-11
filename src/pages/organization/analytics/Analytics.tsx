@@ -1,0 +1,125 @@
+import EmptyState from "@/components/ui/EmptyState";
+import LGAHeatmap from "./LgaHeatMap";
+import CustomTable from "@/custom-components/CustomTable";
+import { Trash } from "lucide-react";
+
+const Analytics = () => {
+  const googleMapsApiKey = import.meta.env.VITE_GOOGLE_CLOUD_API_KEY;
+
+  const columns = [
+    {
+      key: "user_id",
+      header: "User ID",
+      width: "col-span-1",
+      filterable: true,
+    },
+    {
+      key: "question",
+      header: "Question/ Query",
+      width: "col-span-3",
+      filterable: true,
+    },
+    {
+      key: "timestamp",
+      header: "Timestamp",
+      width: "col-span-2",
+      filterable: true,
+    },
+    {
+      key: "keyword",
+      header: "Topic/ Keyword",
+      width: "col-span-2",
+      filterable: true,
+    },
+    {
+      key: "analysis",
+      header: "Analysis",
+      width: "col-span-1",
+      filterable: true,
+    },
+  ];
+
+  const customActions = (
+    <button className="text-gray-500 hover:text-gray-700">
+      <Trash size={18} />
+    </button>
+  );
+
+  return (
+    <div className="p-6">
+      <div className="space-y-6">
+        <h1 className="text-2xl font-bold text-gray-900">
+          LGA Heatmaps Analytics
+        </h1>
+
+        <LGAHeatmap
+          googleMapsApiKey={googleMapsApiKey}
+          className="w-full h-[50vh] rounded-lg border border-gray-200"
+        />
+
+        <div>
+          {/* {messages && messages?.data.length === 0 ? ( */}
+          {faqs && faqs.length === 0 ? (
+            <EmptyState
+              header="No Questions Found"
+              message="Questions hasn't been asked yet."
+            />
+          ) : (
+            <CustomTable
+              columns={columns}
+              data={faqs ?? []}
+              actions={customActions}
+              // isFetching={isFetchingMessages}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const faqs = [
+  {
+    id: 1,
+    user_id: 10023,
+    question: "How do I prevent cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
+  },
+  {
+    id: 2,
+    user_id: 10024,
+    question: "What is cholera about?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
+  },
+  {
+    id: 3,
+    user_id: 10025,
+    question:
+      "What type of drinking water is safe to drink to prevent cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
+  },
+  {
+    id: 4,
+    user_id: 10026,
+    question: "Menene cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
+  },
+  {
+    id: 5,
+    user_id: 10027,
+    question: "Ya zan warkar da cutar cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
+  },
+];
+
+export default Analytics;

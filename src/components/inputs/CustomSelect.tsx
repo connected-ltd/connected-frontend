@@ -4,9 +4,11 @@ interface CustomSelectProps {
   label: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
-  options: Array<{ name: string; value: string }>;
+  options: Array<{ name: string | number; value: string | number }>;
   errorMessage?: FieldError | undefined;
   className?: string;
+  disabled?: boolean;
+  defaultValue?: string | number;
 }
 
 const CustomSelect = ({
@@ -15,19 +17,23 @@ const CustomSelect = ({
   options,
   errorMessage,
   className,
+  disabled,
+  defaultValue,
 }: CustomSelectProps) => {
   return (
     <div className={`${className}`}>
-      <label htmlFor={label} className="text-sm my-2">
+      <label htmlFor={label} className="text-sm my-2 text-primary">
         {label}
       </label>
 
       <select
         {...register}
         id={label}
-        className={`border border-black/10 rounded w-full py-2 px-3 text-sm h-10`}
+        className={`border border-primary/10 rounded w-full py-2 px-3 text-sm h-10 text-primary`}
+        disabled={disabled}
+        defaultValue={defaultValue}
       >
-        <option defaultValue="" disabled>
+        <option value="" disabled>
           Select an option
         </option>
         {options.map((item) => (

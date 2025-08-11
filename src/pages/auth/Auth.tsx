@@ -2,8 +2,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import SideBanner from "./components/SideBanner";
+import { useEffect } from "react";
 
 const Auth = () => {
+  useEffect(() => {
+    document.documentElement.classList.remove("dark");
+    // Optionally, prevent toggling theme on this page
+    // Optionally, set a flag in context if you want to disable theme toggler
+  }, []);
+
   return (
     <div className=" h-screen p-6">
       <div className="flex justify-between items-center h-full">

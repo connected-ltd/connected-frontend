@@ -1,5 +1,6 @@
+import { Shortcodes } from "@/types/shortcodes.types";
 import { connectedApiSlice } from "../../../app/connectedApiSlice";
-import { Areas, AreasStats } from "../../../types/areas.types";
+import { Areas, AreasStats, NumPerAreaStats } from "../../../types/areas.types";
 import {
   Numbers,
   NumbersInput,
@@ -7,10 +8,10 @@ import {
 } from "../../../types/number.types";
 
 const apiSliceWithTags = connectedApiSlice.enhanceEndpoints({
-  addTagTypes: ["numbers", "areas"],
+  addTagTypes: ["numbers", "areas", "shortcodes"],
 });
 
-const QuestionApiSlice = apiSliceWithTags.injectEndpoints({
+const StatsApiSlice = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
     getAreas: builder.query<
       { message: string; data: Areas[]; status: string },
@@ -33,12 +34,26 @@ const QuestionApiSlice = apiSliceWithTags.injectEndpoints({
       query: () => "/numbers/stats",
       providesTags: ["numbers"],
     }),
+    getNumbersPerArea: builder.query<
+      { message: string; data: NumPerAreaStats; status: string },
+      void
+    >({
+      query: () => "/areas/numbers",
+      providesTags: ["numbers"],
+    }),
     getAreaStats: builder.query<
       { message: string; data: AreasStats; status: string },
       void
     >({
       query: () => "/areas/stats",
       providesTags: ["numbers"],
+    }),
+    getShortcodes: builder.query<
+      { message: string; data: Shortcodes; status: string },
+      void
+    >({
+      query: () => "/shortcodes",
+      providesTags: ["shortcodes"],
     }),
     createNumbers: builder.mutation<Numbers[], NumbersInput>({
       query: (values) => ({
@@ -55,6 +70,8 @@ export const {
   useGetAreasQuery,
   useGetNumbersQuery,
   useGetNumbersStatsQuery,
+  useGetNumbersPerAreaQuery,
   useGetAreaStatsQuery,
+  useGetShortcodesQuery,
   useCreateNumbersMutation,
-} = QuestionApiSlice;
+} = StatsApiSlice;

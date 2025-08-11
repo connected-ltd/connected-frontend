@@ -9,11 +9,14 @@ import {
   ChevronLeft,
   FileText,
   BarChart3,
+  Mail,
+  Settings,
 } from "lucide-react";
 
 // Import your logo assets
 import connectedLogoLight from "../../assets/icons/connected-logo-light.svg";
 import connectedLogoDark from "../../assets/icons/connected-logo-dark.svg";
+import sidenavImg from "../../assets/icons/sidenavIcon.svg";
 
 type Props = {
   drawerWidth: number;
@@ -74,6 +77,11 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
       link: "/dashboard",
     },
     {
+      text: "Messages",
+      icon: Mail,
+      link: "/messages",
+    },
+    {
       text: "Files",
       icon: FileText,
       link: "/files",
@@ -83,33 +91,38 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
       icon: BarChart3,
       link: "/analytics",
     },
+    {
+      text: "Settings",
+      icon: Settings,
+      link: "/settings",
+    },
   ];
 
   const navItems =
     user?.role === "admin" ? adminNavItems : organizationNavItems;
 
   const drawer = (
-    <div className="px-4 h-full">
+    <div className="px-4 h-full overflow-auto">
       <div className="my-12 flex justify-center items-center flex-col">
         <div className="flex items-center gap-2 w-full justify-between">
-          <div>
-            <div className="w-[9.7em]">
+          <div className="w-full">
+            <div className="w-full flex flex-col justify-center items-center">
               <img
                 src={connectedLogoDark}
                 alt="connected logo"
-                className="w-full h-auto hidden dark:block"
+                className="w-3/4 h-auto hidden dark:block"
               />
               <img
                 src={connectedLogoLight}
                 alt="connected logo"
-                className="w-full h-auto block dark:hidden"
+                className="w-3/4 h-auto block dark:hidden"
               />
             </div>
-            <p className="text-xs font-light uppercase mt-4 text-primary">
+            {/* <p className="text-xs font-light uppercase mt-4 text-primary">
               {user?.role === "admin"
                 ? "Admin dashboard"
                 : "Organization dashboard"}
-            </p>
+            </p> */}
           </div>
           <button onClick={handleDrawerToggle} className="block sm:hidden">
             <ChevronLeft className="text-[#95969D] cursor-pointer" />
@@ -144,7 +157,7 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
                     />
                     <span
                       className={`text-base ${
-                        isActive ? "font-bold" : "font-normal"
+                        isActive ? "font-bold" : "font-lexend"
                       }`}
                     >
                       {item.text}
@@ -155,10 +168,25 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
             );
           })}
         </ul>
+        <div className="flex flex-col gap-2">
+          <div className="bg-[#A2C8E8] dark:bg-[#F6F5F4] w-full p-3 flex items-center gap-3 rounded-xl">
+            <div>
+              <img src={sidenavImg} alt="" className="w-full" />
+            </div>
+            <div>
+              <p className="text-sm text-[#1A1A1A]">Mubarak Ibrahim</p>
+              <p className="text-xs text-[#1A1A1A]">Admin</p>
+            </div>
+          </div>
 
-        <Button className="w-full" disabled={isLoading} onClick={handleLogout}>
-          {isLoading ? "Loading..." : "LOGOUT"}
-        </Button>
+          <Button
+            className="w-full"
+            disabled={isLoading}
+            onClick={handleLogout}
+          >
+            {isLoading ? "Loading..." : "LOGOUT"}
+          </Button>
+        </div>
       </div>
     </div>
   );

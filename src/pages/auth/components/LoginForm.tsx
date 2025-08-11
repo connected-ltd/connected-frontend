@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useLoginMutation } from "@/app/authApiSlice";
 import { useDispatch } from "react-redux";
 import { login } from "../authSlice";
+import { useToast } from "@/context/ToastContext";
 
 const LoginForm = () => {
   const {
@@ -13,6 +14,8 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LoginSchema>({ resolver: zodResolver(loginSchema) });
+
+  const { showToast } = useToast();
 
   const dispatch = useDispatch();
 
@@ -22,13 +25,17 @@ const LoginForm = () => {
     try {
       const userData = await loginRequest(data).unwrap();
       dispatch(login(userData));
+      showToast("Login successful", "success");
       // navigate("/lesson-plans");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.status === 401 || error.status === 404) {
-        alert("Incorrect username or passsord");
+        // alert("Incorrect username or passsord");
+        // showToast("Incorrect username or passsord", "error");
+        showToast(error.data.message, "error");
       } else {
-        alert("something went wrong");
+        // alert("something went wrong");
+        showToast("something went wrong", "error");
       }
     }
   };

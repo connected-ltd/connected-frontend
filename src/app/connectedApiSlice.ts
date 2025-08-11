@@ -47,9 +47,9 @@ const baseQueryWithErrorHandling: BaseQueryFn<
     const refresh_token = (api.getState() as RootState).auth.refresh_token;
 
     if (refresh_token) {
-      const authApiUrl = import.meta.env.VITE_BIBLIORY_AUTH_URL;
+      const authApiUrl = import.meta.env.VITE_CONNECTED_BACKEND_URL;
       try {
-        const refreshRequest = await fetch(`${authApiUrl}/auth/token-refresh`, {
+        const refreshRequest = await fetch(`${authApiUrl}/refresh`, {
           method: "POST",
           headers: {
             authorization: `Bearer ${refresh_token}`,

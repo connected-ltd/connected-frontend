@@ -3,6 +3,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema, RegisterSchema } from "./schema";
 import { Button } from "@/components/ui/button";
+import CustomTextArea from "@/components/inputs/CustomTextArea";
+import { useRegisterMutation } from "@/app/authApiSlice";
+import { useToast } from "@/context/ToastContext";
 
 const evaluatePasswordStrength = (password: string) => {
   let score = 0;
@@ -34,14 +37,19 @@ const RegisterForm = () => {
 
   const password = watch("password", "");
   const { label, color } = evaluatePasswordStrength(password);
+  const [registerUser] = useRegisterMutation();
+
+  const { showToast } = useToast();
 
   const onSubmit: SubmitHandler<RegisterSchema> = async (data) => {
     try {
-      console.log(data);
+      await registerUser(data).unwrap();
+      showToast("Registration Successful! Please login.", "success");
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error(error);
-      alert("something went wrong");
+      showToast("Something went wrong! Please try again.", "error");
     }
   };
 
@@ -94,7 +102,7 @@ const RegisterForm = () => {
             className="my-2"
           />
 
-          <CustomTextField
+          <CustomTextArea
             label="Description"
             placeholder="Description"
             register={register("description")}
