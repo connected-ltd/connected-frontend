@@ -19,7 +19,9 @@ const Dashboard = () => {
           <div className="flex flex-col justify-between p-5">
             <div className="flex flex-col gap-4">
               <p className="text-[#A0AEC0] text-sm">Welcome Back,</p>
-              <p className="text-[#ffffff] text-3xl ">Mubarak Ibrahim</p>
+              <p className="text-[#ffffff] text-2xl md:text-3xl ">
+                Mubarak Ibrahim
+              </p>
               <p className="text-[#A0AEC0] text-sm">Glad to see you again!</p>
               <p className="text-[#A0AEC0] text-sm">
                 Get started using your dashboard.
@@ -39,8 +41,8 @@ const Dashboard = () => {
           <img src={dashboardPlanet} alt="" className="w-2/4" />
         </div>
         <div>
-          <h4 className="my-4">Quick Links</h4>
-          <div className="grid grid-cols-3 gap-4">
+          <h4 className="my-4 text-lg md:text-2xl">Quick Links</h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {overviewCardItems.map((item) => (
               <CustomOverviewCard
                 key={item.id}

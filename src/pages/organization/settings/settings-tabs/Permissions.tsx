@@ -37,8 +37,10 @@ const Permissions = () => {
   return (
     <div>
       {/* Notification Settings */}
-      <div className="flex gap-10">
-        <h2 className="text-lg font-semibold mb-2">Notification Settings</h2>
+      <div className="flex flex-col md:flex-row gap-2 md:gap-10">
+        <h2 className="text-sm md:text-lg font-semibold">
+          Notification Settings
+        </h2>
         <div className="space-y-2">
           {["All new messages", "Direct messages and mentions", "Nothing"].map(
             (label, idx) => {
@@ -46,7 +48,7 @@ const Permissions = () => {
               return (
                 <label
                   key={value}
-                  className="flex items-center space-x-2 text-text-primary"
+                  className="flex items-center space-x-2 text-gray-500 dark:text-text-primary text-xs md:text-sm"
                 >
                   <input
                     type="radio"
@@ -66,9 +68,11 @@ const Permissions = () => {
       <hr className="border-gray-300 my-2" />
 
       {/* Email Notifications */}
-      <div className="flex gap-10">
-        <h2 className="text-lg font-semibold">Email Notifications</h2>
-        <div>
+      <div className="flex flex-col md:flex-row gap-2 md:gap-10">
+        <h2 className="text-sm md:text-lg font-semibold">
+          Email Notifications
+        </h2>
+        <div className="flex flex-col gap-4 my-2 md:my-4">
           {[
             {
               key: "communication",
@@ -96,8 +100,8 @@ const Permissions = () => {
               className="flex justify-between items-center bg-bg-primary px-4 py-3 rounded-lg shadow-sm"
             >
               <div>
-                <p className="font-medium">{title}</p>
-                <p className="text-sm text-gray-500">{desc}</p>
+                <p className="font-medium text-sm md:text-lg">{title}</p>
+                <p className="text-xs md:text-sm text-gray-500">{desc}</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input

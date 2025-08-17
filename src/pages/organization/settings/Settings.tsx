@@ -8,15 +8,16 @@ import Account from "./settings-tabs/Account";
 import Permissions from "./settings-tabs/Permissions";
 import Payments from "./settings-tabs/Payments";
 import Users from "./settings-tabs/Users";
+import PageHeader from "@/components/ui/PageHeader";
 
 const Settings = () => {
   return (
     <div>
       <div>
-        <h2 className="font-semibold">Settings</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Please update your profile settings here
-        </p>
+        <PageHeader
+          header={"Settings"}
+          subHeader={"Please update your profile settings here"}
+        />
       </div>
       <div className="my-4 w-full bg-bg-primary rounded-lg">
         <Tabs defaultValue="account" className="w-full rounded-lg">

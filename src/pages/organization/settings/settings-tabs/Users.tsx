@@ -67,12 +67,16 @@ const Users = () => {
             message="Users hasn't been added yet."
           />
         ) : (
-          <CustomTable
-            columns={columns}
-            data={usersData ?? []}
-            actions={customActions}
-            // isFetching={isFetchingMessages}
-          />
+          <div className="overflow-x-auto">
+            <div className="min-w-6xl">
+              <CustomTable
+                columns={columns}
+                data={usersData ?? []}
+                actions={customActions}
+                // isFetching={isFetchingMessages}
+              />
+            </div>
+          </div>
         )}
       </div>
     </div>
