@@ -156,7 +156,7 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
                       size={20}
                     />
                     <span
-                      className={`text-base ${
+                      className={`text-sm md:text-base ${
                         isActive ? "font-bold" : "font-lexend"
                       }`}
                     >
@@ -174,7 +174,9 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
               <img src={sidenavImg} alt="" className="w-full" />
             </div>
             <div>
-              <p className="text-sm text-[#1A1A1A]">Mubarak Ibrahim</p>
+              <p className="text-xs md:text-sm text-[#1A1A1A] font-semibold">
+                Mubarak Ibrahim
+              </p>
               <p className="text-xs text-[#1A1A1A]">Admin</p>
             </div>
           </div>

@@ -9,12 +9,12 @@ type Props = {
 const CustomOverviewCard = ({ onClick, title, icon }: Props) => {
   return (
     <div
-      className="bg-bg-primary px-8 py-6 w-full min-w-[18.2em] rounded-xl cursor-pointer"
+      className="bg-bg-primary px-8 py-6 w-full  rounded-xl cursor-pointer"
       onClick={onClick}
     >
       <div className="flex justify-between items-center">
-        <p className="text-sm md:text-base font-medium w-1/4">{title}</p>
-        <div className="px-1 py-2 rounded-2xl mb-2 w-12">{icon}</div>
+        <p className="text-sm md:text-base font-medium w-3/4 md:1/4">{title}</p>
+        <div className="px-1 py-2 rounded-2xl mb-2 w-8 md:w-12">{icon}</div>
       </div>
     </div>
   );

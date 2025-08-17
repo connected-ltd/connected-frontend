@@ -5,6 +5,7 @@ import { Trash } from "lucide-react";
 import CreateMessageModal from "@/components/ui/CreateMessageModal";
 import { useGetMessagesQuery } from "../organization-api/messagesApiSlice";
 import EmptyState from "@/components/ui/EmptyState";
+import PageHeader from "@/components/ui/PageHeader";
 
 const Messages = () => {
   const { data: messages, isLoading: isFetchingMessages } =
@@ -38,14 +39,12 @@ const Messages = () => {
   );
 
   return (
-    <div>
+    <div className="overflow-scroll">
       <CreateMessageModal open={modalOpen} onClose={handleModalClose} />
-      <div>
-        <h2 className="font-semibold">Messages</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Here's a list of all your messages.
-        </p>
-      </div>
+      <PageHeader
+        header={"Messages"}
+        subHeader={"Here's a list of all your messages."}
+      />
       <div>
         <div className="flex justify-end mb-4">
           <Button onClick={handleCreateNew}>Create New</Button>
@@ -58,12 +57,16 @@ const Messages = () => {
               message="You haven't created any messages yet."
             />
           ) : (
-            <CustomTable
-              columns={columns}
-              data={messages?.data ?? []}
-              actions={customActions}
-              isFetching={isFetchingMessages}
-            />
+            <div className="overflow-x-auto">
+              <div className="min-w-6xl">
+                <CustomTable
+                  columns={columns}
+                  data={messages?.data ?? []}
+                  actions={customActions}
+                  isFetching={isFetchingMessages}
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

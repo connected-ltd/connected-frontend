@@ -209,7 +209,9 @@ const CustomTable: React.FC<CustomTableProps> = ({
                 ? column.width.replace("col-span-", "col-span-")
                 : "col-span-2"
               : column.width || "col-span-3"
-          } ${index === 0 ? "pl-0" : ""} py-4 px-4 text-text-secondary`}
+          } ${
+            index === 0 ? "pl-0" : ""
+          } py-4 px-4 text-text-secondary text-sm md:text-base`}
         >
           {row[column.key]}
         </div>
@@ -229,7 +231,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           <div className="relative" ref={filterRef}>
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className={`flex items-center px-4 py-2 rounded-md border ${
+              className={`flex items-center px-4 py-2 rounded-md border text-sm md:text-base ${
                 Object.keys(filters).length > 0
                   ? "border-text-primary bg-primary/10 text-text-secondary"
                   : "border-border-primary text-text-secondary"
@@ -247,7 +249,9 @@ const CustomTable: React.FC<CustomTableProps> = ({
             {isFilterOpen && (
               <div className="absolute left-0 mt-2 w-80 bg-bg-primary rounded-md shadow-lg z-10 border border-border-primary">
                 <div className="p-3 border-b border-border-primary">
-                  <div className="font-medium text-text-primary">Filter</div>
+                  <div className="font-medium text-text-primary text-sm md:text-base">
+                    Filter
+                  </div>
                   <div className="text-sm text-text-primary">
                     Filter table data by column values
                   </div>
@@ -258,7 +262,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
                     .filter((col) => col.filterable !== false)
                     .map((column) => (
                       <div key={column.key} className="mb-3">
-                        <label className="block mb-1 text-sm font-medium text-text-primary">
+                        <label className="block mb-1 font-medium text-text-primary text-sm md:text-base">
                           {column.header}
                         </label>
                         <input
@@ -296,7 +300,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           <div className="relative" ref={groupByRef}>
             <button
               onClick={() => setIsGroupByOpen(!isGroupByOpen)}
-              className={`flex items-center px-4 py-2 rounded-md border ${
+              className={`flex items-center px-4 py-2 rounded-md border text-sm md:text-base ${
                 groupByKey
                   ? "border-primary bg-primary/10 text-text-secondary"
                   : "border-border-primary text-text-secondary"
@@ -310,7 +314,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
             {isGroupByOpen && (
               <div className="absolute left-0 mt-2 w-64 bg-bg-primary rounded-md shadow-lg z-10 border border-border-primary">
                 <div className="p-3 border-b border-border-primary">
-                  <div className="font-medium text-text-primary">
+                  <div className="font-medium text-text-primary text-sm md:text-base">
                     Group By Column
                   </div>
                 </div>
@@ -359,7 +363,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
           <div className="relative" ref={bulkActionsRef}>
             <button
               onClick={() => setIsBulkActionsOpen(!isBulkActionsOpen)}
-              className={`flex items-center px-4 py-2 rounded-md border ${
+              className={`flex items-center px-4 py-2 rounded-md border text-sm md:text-base ${
                 selectedRows.size > 0
                   ? "border-primary bg-primary/10 text-text-secondary"
                   : "border-border-primary text-text-secondary"
@@ -377,7 +381,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
             {isBulkActionsOpen && (
               <div className="absolute left-0 mt-2 w-48 bg-bg-primary rounded-md shadow-lg z-10 border border-border-primary">
                 <div className="p-3 border-b border-border-primary">
-                  <div className="font-medium text-text-primary">
+                  <div className="font-medium text-text-primary text-sm md:text-base">
                     Bulk Actions
                   </div>
                   {selectedRows.size > 0 ? (
@@ -450,14 +454,14 @@ const CustomTable: React.FC<CustomTableProps> = ({
                   : column.width || "col-span-3"
               } ${
                 index === 0 ? "pl-0" : ""
-              } py-3 px-4 font-medium text-text-primary`}
+              } py-3 px-4 font-medium text-text-primary text-sm md:text-base`}
             >
               {column.header}
             </div>
           ))}
           {/* Actions Header */}
           {actions && (
-            <div className="py-3 px-4 font-medium text-text-primary text-right">
+            <div className="py-3 px-4 font-medium text-text-primary text-sm md:text-base text-right">
               Actions
             </div>
           )}
