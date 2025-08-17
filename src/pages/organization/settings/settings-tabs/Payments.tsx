@@ -1,65 +1,84 @@
+// src/pages/organization/settings/Payments.tsx
 import { Button } from "@/components/ui/button";
 import EmptyState from "@/components/ui/EmptyState";
 import CustomTable from "@/custom-components/CustomTable";
-import { CircleDollarSign, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+import { useState } from "react";
+import { useGetCreditBalanceQuery } from "../settingsApiSlice";
+import LinearProgress from "@/components/ui/LinearProgress";
+import InitializePaymentModal from "./components/InitializePaymentModal";
+import PaymentProgress from "./components/PaymentProgress";
 
 const Payments = () => {
   const columns = [
-    {
-      key: "amount",
-      header: "Amount",
-      width: "col-span-2",
-      filterable: true,
-    },
+    { key: "amount", header: "Amount", width: "col-span-2", filterable: true },
     {
       key: "description",
       header: "Description",
       width: "col-span-4",
       filterable: true,
     },
-    {
-      key: "date",
-      header: "Date",
-      width: "col-span-2",
-      filterable: true,
-    },
-    {
-      key: "type",
-      header: "Type",
-      width: "col-span-1",
-      filterable: true,
-    },
-    {
-      key: "status",
-      header: "Status",
-      width: "col-span-1",
-      filterable: true,
-    },
+    { key: "date", header: "Date", width: "col-span-2", filterable: true },
+    { key: "type", header: "Type", width: "col-span-1", filterable: true },
+    { key: "status", header: "Status", width: "col-span-1", filterable: true },
   ];
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleInitializePayment = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
+  // ✅ show verifying overlay
+  const [progressOpen, setProgressOpen] = useState(false);
+  const [pendingRef, setPendingRef] = useState<string | null>(null);
+  const [popup, setPopup] = useState<Window | null>(null);
+
+  // Wallet balance (will refetch on verify thanks to invalidatesTags: ['credits'])
+  const { data, isLoading } = useGetCreditBalanceQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
 
   return (
     <div>
+      <InitializePaymentModal
+        open={modalOpen}
+        onClose={handleModalClose}
+        onPaymentLaunched={({ reference, popup }) => {
+          setPendingRef(reference);
+          setPopup(popup);
+          setProgressOpen(true);
+        }}
+      />
+
+      <PaymentProgress
+        open={progressOpen}
+        reference={pendingRef || ""}
+        popup={popup || undefined}
+        onDone={() => {
+          setProgressOpen(false);
+          setPendingRef(null);
+          setPopup(null);
+        }}
+      />
+
+      {isLoading && <LinearProgress />}
+
       <div className="border border-border-primary w-full p-4 rounded-lg flex justify-between items-center">
         <div className="flex flex-col gap-4">
           <p className="text-text-primary text-xs md:text-sm">Unit Wallet</p>
           <p className="text-lg md:text-xl text-text-primary">Total Balance</p>
           <h3 className="text-2xl md:text-3xl text-text-primary">
-            ₦ 12,850.55
+            {data?.data.balance} credits
           </h3>
-          <div className="flex items-center bg-bg-primary-dark2 p-2 gap-2 rounded-full text-white w-fit">
-            <CircleDollarSign size={18} className="text-[#F9E636] shrink-0" />
-            <span className="text-xs md:text-base">1,450</span>
-          </div>
         </div>
         <div>
-          <Button>
+          <Button onClick={handleInitializePayment}>
             <Plus /> Top Up
           </Button>
         </div>
       </div>
 
       <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg mt-10">
-        {/* {messages && messages?.data.length === 0 ? ( */}
         {paymentsData && paymentsData.length === 0 ? (
           <EmptyState
             header="No Payments Found"
@@ -68,11 +87,7 @@ const Payments = () => {
         ) : (
           <div className="overflow-x-auto">
             <div className="min-w-6xl">
-              <CustomTable
-                columns={columns}
-                data={paymentsData ?? []}
-                // isFetching={isFetchingMessages}
-              />
+              <CustomTable columns={columns} data={paymentsData ?? []} />
             </div>
           </div>
         )}

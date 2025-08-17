@@ -1,29 +1,52 @@
-// import { connectedApiSlice } from "../../../app/connectedApiSlice";
-// import { Areas } from "../../../types/areas.types";
-// import { Numbers, NumbersInput } from "../../../types/number.types";
+import {
+  Credits,
+  InitiatePaymentInput,
+  InitiatePaymentResponse,
+  VerifyPaymentInput,
+  VerifyPaymentResponse,
+} from "@/types/user.types";
+import { connectedApiSlice } from "../../../app/connectedApiSlice";
 
-// const apiSliceWithTags = connectedApiSlice.enhanceEndpoints({
-//   addTagTypes: ["numbers", "areas", "shortcodes"],
-// });
+const apiSliceWithTags = connectedApiSlice.enhanceEndpoints({
+  addTagTypes: ["user", "notification", "credits"],
+});
 
-// const SettingsApiSlice = apiSliceWithTags.injectEndpoints({
-//   endpoints: (builder) => ({
-//     getAreas: builder.query<
-//       { message: string; data: Areas[]; status: string },
-//       void
-//     >({
-//       query: () => "/areas",
-//       providesTags: ["numbers"],
-//     }),
-//     createNumbers: builder.mutation<Numbers[], NumbersInput>({
-//       query: (values) => ({
-//         url: "/numbers",
-//         method: "POST",
-//         body: { ...values },
-//       }),
-//       invalidatesTags: ["numbers"],
-//     }),
-//   }),
-// });
+const SettingsApiSlice = apiSliceWithTags.injectEndpoints({
+  endpoints: (builder) => ({
+    getCreditBalance: builder.query<
+      { message: string; data: Credits; status: string },
+      void
+    >({
+      query: () => "/credits/balance",
+      providesTags: ["credits"],
+    }),
+    initiateCreditPayment: builder.mutation<
+      { data: InitiatePaymentResponse; message: string; status: string },
+      InitiatePaymentInput
+    >({
+      query: (values) => ({
+        url: "/credits/initialize-payment",
+        method: "POST",
+        body: { ...values },
+      }),
+      //   invalidatesTags: ["credits"],
+    }),
+    verifyCreditPayment: builder.mutation<
+      { data: VerifyPaymentResponse; message: string; status: string },
+      VerifyPaymentInput
+    >({
+      query: (values) => ({
+        url: "/credits/verify-payment",
+        method: "POST",
+        body: { ...values },
+      }),
+      invalidatesTags: ["credits"],
+    }),
+  }),
+});
 
-// export const { useGetAreasQuery, useCreateNumbersMutation } = SettingsApiSlice;
+export const {
+  useGetCreditBalanceQuery,
+  useInitiateCreditPaymentMutation,
+  useVerifyCreditPaymentMutation,
+} = SettingsApiSlice;
