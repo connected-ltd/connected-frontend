@@ -20,8 +20,11 @@ const Settings = () => {
         />
       </div>
       <div className="my-4 w-full bg-bg-primary rounded-lg">
-        <Tabs defaultValue="account" className="w-full rounded-lg">
+        <Tabs defaultValue="payments" className="w-full rounded-lg">
           <TabsList className="grid w-full grid-cols-4 rounded-lg">
+            <TabsTrigger value="payments" className="rounded-t-lg">
+              Payments
+            </TabsTrigger>
             <TabsTrigger value="account" className="rounded-t-lg">
               Account
             </TabsTrigger>
@@ -31,10 +34,13 @@ const Settings = () => {
             <TabsTrigger value="permissions" className="rounded-t-lg">
               Permissions
             </TabsTrigger>
-            <TabsTrigger value="payments" className="rounded-t-lg">
-              Payments
-            </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="payments">
+            <div className="px-6 py-4">
+              <Payments />
+            </div>
+          </TabsContent>
 
           <TabsContent value="account">
             <div className="px-6 py-4">
@@ -51,12 +57,6 @@ const Settings = () => {
           <TabsContent value="permissions">
             <div className="px-6 py-4">
               <Permissions />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="payments">
-            <div className="px-6 py-4">
-              <Payments />
             </div>
           </TabsContent>
         </Tabs>

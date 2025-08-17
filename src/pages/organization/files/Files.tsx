@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import CustomTable from "@/custom-components/CustomTable";
 import { Trash } from "lucide-react";
@@ -6,6 +5,7 @@ import EmptyState from "@/components/ui/EmptyState";
 import { useGetFilesQuery } from "../organization-api/filesApiSlice";
 import AddFileModal from "@/components/ui/AddFileModal";
 import PageHeader from "@/components/ui/PageHeader";
+import { useState } from "react";
 
 const Files = () => {
   const { data: files, isLoading: isFetchingMessages } = useGetFilesQuery();
@@ -25,7 +25,7 @@ const Files = () => {
     },
   ];
 
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleCreateNew = () => setModalOpen(true);
 

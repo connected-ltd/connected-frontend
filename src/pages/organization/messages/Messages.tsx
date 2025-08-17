@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import CustomTable from "@/custom-components/CustomTable";
 import { Trash } from "lucide-react";
@@ -26,7 +26,7 @@ const Messages = () => {
     },
   ];
 
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleCreateNew = () => setModalOpen(true);
 
