@@ -4,9 +4,13 @@ import CustomTable from "@/custom-components/CustomTable";
 import { Edit, Trash } from "lucide-react";
 import EmptyState from "@/components/ui/EmptyState";
 import AddUserModal from "@/components/ui/AddUserModal";
+import PageHeader from "@/components/ui/PageHeader";
+import { useGetNumbersQuery } from "../admin-api/statsApiSlice";
 
 const Users = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
+
+  const { data, isLoading } = useGetNumbersQuery();
 
   const handleAddUser = () => setModalOpen(true);
 
@@ -15,32 +19,26 @@ const Users = () => {
   const columns = [
     {
       key: "id",
-      header: "S/N",
+      header: "User ID",
       width: "col-span-1",
       filterable: true,
     },
     {
-      key: "name",
-      header: "Name",
+      key: "number",
+      header: "Phone Number",
       width: "col-span-3",
       filterable: true,
     },
     {
-      key: "email",
-      header: "Email",
-      width: "col-span-3",
-      filterable: true,
-    },
-    {
-      key: "role",
-      header: "Role",
+      key: "language",
+      header: "Preferred Language",
       width: "col-span-2",
       filterable: true,
     },
     {
-      key: "status",
-      header: "Activity Status",
-      width: "col-span-1",
+      key: "area",
+      header: "Location",
+      width: "col-span-3",
       filterable: true,
     },
   ];
@@ -59,20 +57,17 @@ const Users = () => {
   return (
     <div>
       <AddUserModal open={modalOpen} onClose={handleModalClose} />
-      <div>
-        <h2 className="font-semibold">User List</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Here's a list of all users enrolled.
-        </p>
-      </div>
+      <PageHeader
+        header={"User List"}
+        subHeader={"Here's a list of all users enrolled."}
+      />
       <div>
         <div className="flex justify-end mb-4">
           <Button onClick={handleAddUser}>Add user</Button>
         </div>
 
         <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
-          {/* {messages && messages?.data.length === 0 ? ( */}
-          {usersData && usersData.length === 0 ? (
+          {data && data?.data.length === 0 ? (
             <EmptyState
               header="No Users Found"
               message="Users hasn't been added yet."
@@ -80,9 +75,9 @@ const Users = () => {
           ) : (
             <CustomTable
               columns={columns}
-              data={usersData ?? []}
+              data={data?.data ?? []}
               actions={customActions}
-              // isFetching={isFetchingMessages}
+              isFetching={isLoading}
             />
           )}
         </div>
@@ -90,50 +85,5 @@ const Users = () => {
     </div>
   );
 };
-
-const usersData = [
-  {
-    id: 1,
-    name: "Mubarak Ibrahim",
-    email: "mubarak@email.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 2,
-    name: "Amina Mustapha",
-    email: "amina@email.com",
-    role: "Admin",
-    status: "Inactive",
-  },
-  {
-    id: 3,
-    name: "Aisha Muhammad",
-    email: "aisha@email.com",
-    role: "Member",
-    status: "Active",
-  },
-  {
-    id: 4,
-    name: "Usman Ramalan",
-    email: "usman@email.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 5,
-    name: "Ibrahim Aliyu",
-    email: "ibrahim@email.com",
-    role: "Member",
-    status: "Inactive",
-  },
-  {
-    id: 6,
-    name: "Maryam Rabi'u",
-    email: "maryam@email.com",
-    role: "Member",
-    status: "Active",
-  },
-];
 
 export default Users;

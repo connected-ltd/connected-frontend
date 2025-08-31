@@ -1,7 +1,6 @@
 import EmptyState from "@/components/ui/EmptyState";
 import LGAHeatmap from "./LgaHeatMap";
 import CustomTable from "@/custom-components/CustomTable";
-import { Trash } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 
 const Analytics = () => {
@@ -17,7 +16,7 @@ const Analytics = () => {
     {
       key: "question",
       header: "Question/ Query",
-      width: "col-span-3",
+      width: "col-span-4",
       filterable: true,
     },
     {
@@ -39,12 +38,6 @@ const Analytics = () => {
       filterable: true,
     },
   ];
-
-  const customActions = (
-    <button className="text-gray-500 hover:text-gray-700">
-      <Trash size={18} />
-    </button>
-  );
 
   return (
     <div>
@@ -71,7 +64,6 @@ const Analytics = () => {
                 <CustomTable
                   columns={columns}
                   data={faqs ?? []}
-                  actions={customActions}
                   // isFetching={isFetchingMessages}
                 />
               </div>

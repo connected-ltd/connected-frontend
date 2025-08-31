@@ -1,32 +1,41 @@
 import CustomTable from "@/custom-components/CustomTable";
-import { Edit, Trash } from "lucide-react";
 import EmptyState from "@/components/ui/EmptyState";
 import InOutBarChart from "@/components/charts/InOutBarChart";
+import PageHeader from "@/components/ui/PageHeader";
 
 const AnalyticsInfo = () => {
   const columns = [
-    { key: "id", header: "S/N", width: "col-span-1", filterable: true },
-    { key: "name", header: "Name", width: "col-span-3", filterable: true },
-    { key: "email", header: "Email", width: "col-span-3", filterable: true },
-    { key: "role", header: "Role", width: "col-span-2", filterable: true },
     {
-      key: "status",
-      header: "Activity Status",
+      key: "user_id",
+      header: "User ID",
+      width: "col-span-1",
+      filterable: true,
+    },
+    {
+      key: "question",
+      header: "Question/ Query",
+      width: "col-span-4",
+      filterable: true,
+    },
+    {
+      key: "timestamp",
+      header: "Timestamp",
+      width: "col-span-2",
+      filterable: true,
+    },
+    {
+      key: "keyword",
+      header: "Topic/ Keyword",
+      width: "col-span-2",
+      filterable: true,
+    },
+    {
+      key: "analysis",
+      header: "Analysis",
       width: "col-span-1",
       filterable: true,
     },
   ];
-
-  const customActions = (
-    <div className="flex items-center justify-center gap-5">
-      <button className="text-gray-500 hover:text-gray-700">
-        <Edit size={18} />
-      </button>
-      <button className="text-gray-500 hover:text-gray-700">
-        <Trash size={18} />
-      </button>
-    </div>
-  );
 
   // sample values
   const labels = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thur"];
@@ -35,75 +44,77 @@ const AnalyticsInfo = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="font-semibold">Analytics</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Here's some analytics of messages sent.
-        </p>
-      </div>
+      <PageHeader
+        header={"Analytics"}
+        subHeader={"Here's some analytics of messages sent."}
+      />
 
       <InOutBarChart labels={labels} inData={inData} outData={outData} />
 
       <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
-        {usersData && usersData.length === 0 ? (
+        {/* {messages && messages?.data.length === 0 ? ( */}
+        {faqs && faqs.length === 0 ? (
           <EmptyState
-            header="No Users Found"
-            message="Users hasn't been added yet."
+            header="No Questions Found"
+            message="Questions hasn't been asked yet."
           />
         ) : (
-          <CustomTable
-            columns={columns}
-            data={usersData ?? []}
-            actions={customActions}
-          />
+          <div className="overflow-x-auto">
+            <div>
+              <CustomTable
+                columns={columns}
+                data={faqs ?? []}
+                // isFetching={isFetchingMessages}
+              />
+            </div>
+          </div>
         )}
       </div>
     </div>
   );
 };
 
-const usersData = [
+const faqs = [
   {
     id: 1,
-    name: "Mubarak Ibrahim",
-    email: "mubarak@email.com",
-    role: "Admin",
-    status: "Active",
+    user_id: 10023,
+    question: "How do I prevent cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
   },
   {
     id: 2,
-    name: "Amina Mustapha",
-    email: "amina@email.com",
-    role: "Admin",
-    status: "Inactive",
+    user_id: 10024,
+    question: "What is cholera about?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
   },
   {
     id: 3,
-    name: "Aisha Muhammad",
-    email: "aisha@email.com",
-    role: "Member",
-    status: "Active",
+    user_id: 10025,
+    question:
+      "What type of drinking water is safe to drink to prevent cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
   },
   {
     id: 4,
-    name: "Usman Ramalan",
-    email: "usman@email.com",
-    role: "Admin",
-    status: "Active",
+    user_id: 10026,
+    question: "Menene cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
   },
   {
     id: 5,
-    name: "Ibrahim Aliyu",
-    email: "ibrahim@email.com",
-    role: "Member",
-    status: "Inactive",
-  },
-  {
-    id: 6,
-    name: "Maryam Rabi'u",
-    email: "maryam@email.com",
-    role: "Member",
-    status: "Active",
+    user_id: 10027,
+    question: "Ya zan warkar da cutar cholera?",
+    timestamp: "2023-10-01T12:00:00Z",
+    keyword: "Cholera",
+    analysis: "50%",
   },
 ];
 

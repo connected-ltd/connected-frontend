@@ -1,7 +1,8 @@
 export interface Numbers {
+  area: string;
   created_at: string;
   id: number;
-  is_set: boolean;
+  is_set: true;
   language: string;
   number: string;
   updated_at: string;

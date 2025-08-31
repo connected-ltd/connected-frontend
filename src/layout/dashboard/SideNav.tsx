@@ -86,6 +86,11 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
       icon: Wallet,
       link: "/payments",
     },
+    {
+      text: "Settings",
+      icon: Settings,
+      link: "/settings",
+    },
   ];
 
   const organizationNavItems = [

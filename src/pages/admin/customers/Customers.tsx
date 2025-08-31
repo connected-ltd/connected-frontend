@@ -1,6 +1,7 @@
 import CustomTable from "@/custom-components/CustomTable";
 import { Edit, Trash } from "lucide-react";
 import EmptyState from "@/components/ui/EmptyState";
+import PageHeader from "@/components/ui/PageHeader";
 
 const Customers = () => {
   const columns = [
@@ -49,12 +50,10 @@ const Customers = () => {
 
   return (
     <div>
-      <div>
-        <h2 className="font-semibold">Customers</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Here's a list of all organizations registered.
-        </p>
-      </div>
+      <PageHeader
+        header={"Customers"}
+        subHeader={"Here's a list of all organizations registered."}
+      />
       <div>
         <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
           {/* {messages && messages?.data.length === 0 ? ( */}

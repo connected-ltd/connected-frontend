@@ -1,6 +1,7 @@
 import { LinearProgress } from "@mui/material";
 import {
   useGetAreasQuery,
+  useGetNumbersQuery,
   useGetNumbersStatsQuery,
 } from "../admin-api/statsApiSlice";
 import EmptyState from "@/components/ui/EmptyState";
@@ -11,6 +12,7 @@ const AdminDashboard = () => {
   const { data: areas, isLoading: isFetchingAreas } = useGetAreasQuery();
   const { data: numberStats, isLoading: isFetchingNumberStats } =
     useGetNumbersStatsQuery();
+  const { data, isLoading } = useGetNumbersQuery();
 
   const totalAreas = areas?.data.length;
 
@@ -50,32 +52,26 @@ const AdminDashboard = () => {
   const columns = [
     {
       key: "id",
-      header: "S/N",
+      header: "User ID",
       width: "col-span-1",
       filterable: true,
     },
     {
-      key: "name",
-      header: "Name",
+      key: "number",
+      header: "Phone Number",
       width: "col-span-3",
       filterable: true,
     },
     {
-      key: "email",
-      header: "Email",
-      width: "col-span-3",
-      filterable: true,
-    },
-    {
-      key: "role",
-      header: "Role",
+      key: "language",
+      header: "Preferred Language",
       width: "col-span-2",
       filterable: true,
     },
     {
-      key: "status",
-      header: "Activity Status",
-      width: "col-span-1",
+      key: "area",
+      header: "Location",
+      width: "col-span-3",
       filterable: true,
     },
   ];
@@ -111,8 +107,7 @@ const AdminDashboard = () => {
         <h4>Users List</h4>
       </div>
       <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
-        {/* {messages && messages?.data.length === 0 ? ( */}
-        {usersData && usersData.length === 0 ? (
+        {data && data?.data.length === 0 ? (
           <EmptyState
             header="No Users Found"
             message="Users hasn't been added yet."
@@ -120,59 +115,14 @@ const AdminDashboard = () => {
         ) : (
           <CustomTable
             columns={columns}
-            data={usersData ?? []}
+            data={data?.data ?? []}
             actions={customActions}
-            // isFetching={isFetchingMessages}
+            isFetching={isLoading}
           />
         )}
       </div>
     </div>
   );
 };
-
-const usersData = [
-  {
-    id: 1,
-    name: "Mubarak Ibrahim",
-    email: "mubarak@email.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 2,
-    name: "Amina Mustapha",
-    email: "amina@email.com",
-    role: "Admin",
-    status: "Inactive",
-  },
-  {
-    id: 3,
-    name: "Aisha Muhammad",
-    email: "aisha@email.com",
-    role: "Member",
-    status: "Active",
-  },
-  {
-    id: 4,
-    name: "Usman Ramalan",
-    email: "usman@email.com",
-    role: "Admin",
-    status: "Active",
-  },
-  {
-    id: 5,
-    name: "Ibrahim Aliyu",
-    email: "ibrahim@email.com",
-    role: "Member",
-    status: "Inactive",
-  },
-  {
-    id: 6,
-    name: "Maryam Rabi'u",
-    email: "maryam@email.com",
-    role: "Member",
-    status: "Active",
-  },
-];
 
 export default AdminDashboard;

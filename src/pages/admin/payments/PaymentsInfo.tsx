@@ -1,5 +1,6 @@
 import CustomTable from "@/custom-components/CustomTable";
 import EmptyState from "@/components/ui/EmptyState";
+import PageHeader from "@/components/ui/PageHeader";
 
 const PaymentsInfo = () => {
   const columns = [
@@ -37,12 +38,10 @@ const PaymentsInfo = () => {
 
   return (
     <div>
-      <div>
-        <h2 className="font-semibold">Payments</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Here's a list of all payments made.
-        </p>
-      </div>
+      <PageHeader
+        header={"Payments"}
+        subHeader={"Here's a list of all payments made."}
+      />
       <div>
         <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
           {/* {messages && messages?.data.length === 0 ? ( */}

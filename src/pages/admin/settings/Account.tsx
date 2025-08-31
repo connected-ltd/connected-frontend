@@ -1,6 +1,5 @@
 import CustomTextField from "@/components/inputs/CustomTextField";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { accountSchema, AccountSchema } from "../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/context/ToastContext";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,10 @@ import { selectCurrentUser } from "@/pages/auth/authSlice";
 import { Check } from "lucide-react";
 import { useEditUserMutation } from "@/pages/auth/userApiSlice";
 import CustomTextArea from "@/components/inputs/CustomTextArea";
+import {
+  AccountSchema,
+  accountSchema,
+} from "@/pages/organization/settings/schema";
 
 const Account = () => {
   const {
@@ -48,8 +51,8 @@ const Account = () => {
             />
 
             <CustomTextField
-              label="Company Name"
-              placeholder="Type your company name here"
+              label="Name"
+              placeholder="Type your name here"
               register={register("company_name")}
               errorMessage={errors.company_name}
               defaultValue={currentUser?.company_name}
@@ -57,8 +60,8 @@ const Account = () => {
             />
 
             <CustomTextField
-              label="Company Address"
-              placeholder="Type your company address here"
+              label="Address"
+              placeholder="Type your address here"
               register={register("address")}
               errorMessage={errors.address}
               defaultValue={currentUser?.address}
@@ -67,7 +70,7 @@ const Account = () => {
 
             <CustomTextArea
               label="Description"
-              placeholder="Type your company description here"
+              placeholder="Type your description here"
               register={register("description")}
               errorMessage={errors.description}
               defaultValue={currentUser?.description}

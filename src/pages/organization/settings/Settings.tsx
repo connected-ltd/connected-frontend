@@ -17,7 +17,7 @@ const Settings = () => {
       <div>
         <PageHeader
           header={"Settings"}
-          subHeader={"Please update your profile settings here"}
+          subHeader={"Update your profile settings here"}
         />
       </div>
       <div className="my-4 w-full bg-bg-primary rounded-lg">

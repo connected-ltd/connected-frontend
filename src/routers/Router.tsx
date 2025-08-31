@@ -20,6 +20,7 @@ import Users from "@/pages/admin/users/Users";
 import Customers from "@/pages/admin/customers/Customers";
 import PaymentsInfo from "@/pages/admin/payments/PaymentsInfo";
 import AnalyticsInfo from "@/pages/admin/analytics/AnalyticsInfo";
+import AdminSettings from "@/pages/admin/settings/AdminSettings";
 // Organization routes
 
 type ProtectedRoute = {
@@ -115,6 +116,7 @@ const Router = () => {
           <Route path="/customers" element={<Customers />} />
           <Route path="/analytics" element={<AnalyticsInfo />} />
           <Route path="/payments" element={<PaymentsInfo />} />
+          <Route path="/settings" element={<AdminSettings />} />
         </Route>
       ) : (
         // Organization route
