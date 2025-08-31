@@ -22,7 +22,7 @@ const Settings = () => {
       </div>
       <div className="my-4 w-full bg-bg-primary rounded-lg">
         <Tabs defaultValue="payments" className="w-full rounded-lg">
-          <TabsList className="grid w-full grid-cols-4 rounded-lg">
+          <TabsList className="grid w-full grid-cols-3 rounded-lg">
             <TabsTrigger value="payments" className="rounded-t-lg">
               Payments
             </TabsTrigger>

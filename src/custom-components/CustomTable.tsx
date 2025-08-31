@@ -29,7 +29,7 @@ interface ColumnConfig {
 interface CustomTableProps {
   columns: ColumnConfig[];
   data: TableRow[];
-  actions?: React.ReactNode;
+  actions?: ((row: TableRow) => React.ReactNode) | React.ReactNode;
   onCreateNew?: () => void;
   onCustomizeTable?: () => void;
   isFetching?: boolean;
@@ -218,7 +218,11 @@ const CustomTable: React.FC<CustomTableProps> = ({
       ))}
 
       {/* Actions */}
-      <div className="py-4 px-4 text-right">{actions || <span></span>}</div>
+      <div className="py-4 px-4 text-right">
+        {typeof actions === "function"
+          ? actions(row)
+          : actions || <span></span>}
+      </div>
     </div>
   );
 
@@ -414,68 +418,70 @@ const CustomTable: React.FC<CustomTableProps> = ({
       </div>
 
       {/* Table */}
-      <div className="border border-border-primary rounded-sm overflow-hidden">
-        {isFetching && (
-          <div className="mb-2">
-            <LinearProgress />
-          </div>
-        )}
-        {/* Table Header */}
-        <div className="grid grid-cols-12 bg-bg-primary border-b border-border-primary">
-          {/* Checkbox Header */}
-          <div className="flex items-center px-4 py-3">
-            <input
-              type="checkbox"
-              checked={
-                tableData.length > 0 && selectedRows.size === tableData.length
-              }
-              onChange={() => {
-                if (selectedRows.size === tableData.length) {
-                  // Deselect all
-                  setSelectedRows(new Set());
-                } else {
-                  // Select all
-                  const allIds = new Set(tableData.map((row) => row.id));
-                  setSelectedRows(allIds);
-                }
-              }}
-              className="h-4 w-4 text-primary rounded border-border-primary focus:ring-primary"
-            />
-          </div>
-          {/* Column Headers - Adjusted for checkbox */}
-          {columns.map((column, index) => (
-            <div
-              key={column.key}
-              className={`${
-                index === 0
-                  ? column.width
-                    ? column.width.replace("col-span-", "col-span-")
-                    : "col-span-2"
-                  : column.width || "col-span-3"
-              } ${
-                index === 0 ? "pl-0" : ""
-              } py-3 px-4 font-medium text-text-primary text-sm md:text-base`}
-            >
-              {column.header}
+      <div className="w-full max-w-[100vw] overflow-x-auto">
+        <div className="min-w-[72rem] shrink-0 border border-border-primary rounded-sm">
+          {isFetching && (
+            <div className="mb-2">
+              <LinearProgress />
             </div>
-          ))}
-          {/* Actions Header */}
-          {actions && (
-            <div className="py-3 px-4 font-medium text-text-primary text-sm md:text-base text-right">
-              Actions
+          )}
+          {/* Table Header */}
+          <div className="grid grid-cols-12 bg-bg-primary border-b border-border-primary">
+            {/* Checkbox Header */}
+            <div className="flex items-center px-4 py-3">
+              <input
+                type="checkbox"
+                checked={
+                  tableData.length > 0 && selectedRows.size === tableData.length
+                }
+                onChange={() => {
+                  if (selectedRows.size === tableData.length) {
+                    // Deselect all
+                    setSelectedRows(new Set());
+                  } else {
+                    // Select all
+                    const allIds = new Set(tableData.map((row) => row.id));
+                    setSelectedRows(allIds);
+                  }
+                }}
+                className="h-4 w-4 text-primary rounded border-border-primary focus:ring-primary"
+              />
+            </div>
+            {/* Column Headers - Adjusted for checkbox */}
+            {columns.map((column, index) => (
+              <div
+                key={column.key}
+                className={`${
+                  index === 0
+                    ? column.width
+                      ? column.width.replace("col-span-", "col-span-")
+                      : "col-span-2"
+                    : column.width || "col-span-3"
+                } ${
+                  index === 0 ? "pl-0" : ""
+                } py-3 px-4 font-medium text-text-primary text-sm md:text-base`}
+              >
+                {column.header}
+              </div>
+            ))}
+            {/* Actions Header */}
+            {actions && (
+              <div className="py-3 px-4 font-medium text-text-primary text-sm md:text-base text-right">
+                Actions
+              </div>
+            )}
+          </div>
+
+          {/* Table Body */}
+          {renderTableRows()}
+
+          {/* Empty State */}
+          {tableData.length === 0 && (
+            <div className="py-8 text-center text-text-secondary">
+              No data available
             </div>
           )}
         </div>
-
-        {/* Table Body */}
-        {renderTableRows()}
-
-        {/* Empty State */}
-        {tableData.length === 0 && (
-          <div className="py-8 text-center text-text-secondary">
-            No data available
-          </div>
-        )}
       </div>
 
       {/* Selected Items Bar */}

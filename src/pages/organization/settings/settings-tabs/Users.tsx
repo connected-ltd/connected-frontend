@@ -68,7 +68,7 @@ const Users = () => {
           />
         ) : (
           <div className="overflow-x-auto">
-            <div className="min-w-6xl">
+            <div>
               <CustomTable
                 columns={columns}
                 data={usersData ?? []}

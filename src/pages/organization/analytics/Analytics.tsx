@@ -67,7 +67,7 @@ const Analytics = () => {
             />
           ) : (
             <div className="overflow-x-auto">
-              <div className="min-w-6xl">
+              <div>
                 <CustomTable
                   columns={columns}
                   data={faqs ?? []}

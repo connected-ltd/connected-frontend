@@ -1,7 +1,9 @@
 export interface Message {
+  area: string;
   created_at: string;
   id: number;
   message: string;
+  shortcode: string;
   updated_at: string;
 }
 
