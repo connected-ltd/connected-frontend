@@ -37,7 +37,7 @@ const DeleteItemModal: React.FC<DeleteItemModalProps> = ({
             <span className="font-bold">
               “{message ? message.message : ""}”
             </span>
-            ? You can’t undo this action.
+            ? You can't undo this action.
           </p>
         </div>
         <div className="flex mt-2 gap-4 justify-between items-center">
@@ -46,6 +46,7 @@ const DeleteItemModal: React.FC<DeleteItemModalProps> = ({
             variant={"default"}
             size={"default"}
             onClick={onClose}
+            disabled={isLoading}
           >
             Cancel
           </Button>

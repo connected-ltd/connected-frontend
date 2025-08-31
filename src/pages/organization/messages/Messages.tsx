@@ -3,11 +3,15 @@ import { Button } from "@/components/ui/button";
 import CustomTable from "@/custom-components/CustomTable";
 import { Trash } from "lucide-react";
 import CreateMessageModal from "@/components/ui/CreateMessageModal";
-import { useGetMessagesQuery } from "../organization-api/messagesApiSlice";
+import {
+  useDeleteMessageMutation,
+  useGetMessagesQuery,
+} from "../organization-api/messagesApiSlice";
 import EmptyState from "@/components/ui/EmptyState";
 import PageHeader from "@/components/ui/PageHeader";
 import DeleteItemModal from "@/components/ui/DeleteItemModal";
 import { Message } from "@/types/messages.types";
+import { useToast } from "@/context/ToastContext";
 
 const Messages = () => {
   const { data: messages, isLoading: isFetchingMessages } =
@@ -31,6 +35,8 @@ const Messages = () => {
   const [deleteModal, setDeleteModal] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [deleteMessageRequest, { isLoading }] = useDeleteMessageMutation();
+  const { showToast } = useToast();
 
   const handleCreateNew = () => setModalOpen(true);
   const handleDeleteMessageModal = (message: Message) => {
@@ -41,11 +47,17 @@ const Messages = () => {
   const handleModalClose = () => setModalOpen(false);
   const handleCloseDeleteMessageModal = () => setDeleteModal(false);
 
-  const handleDeleteMessage = (message: Message) => {
+  const handleDeleteMessage = async (message: Message) => {
     if (message) {
       console.log("Delete message id:", message);
-    } else {
-      console.log("No message selected");
+      try {
+        await deleteMessageRequest({ id: message.id }).unwrap();
+        handleCloseDeleteMessageModal();
+        showToast("Message deleted successfully", "success");
+      } catch (error) {
+        console.error("Failed to delete the message: ", error);
+        showToast("Something went wrong", "error");
+      }
     }
   };
 
@@ -66,7 +78,7 @@ const Messages = () => {
         open={deleteModal}
         onClose={handleCloseDeleteMessageModal}
         handlSubmit={handleDeleteMessage}
-        isLoading={false}
+        isLoading={isLoading}
         message={selectedMessage}
       />
       <PageHeader

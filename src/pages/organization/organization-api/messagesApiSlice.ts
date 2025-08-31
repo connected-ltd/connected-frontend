@@ -22,8 +22,18 @@ const MessagesApiSlice = apiSliceWithTags.injectEndpoints({
       }),
       invalidatesTags: ["message"],
     }),
+    deleteMessage: builder.mutation<unknown, { id: number }>({
+      query: ({ id }) => ({
+        url: `/messages/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["message"],
+    }),
   }),
 });
 
-export const { useGetMessagesQuery, useCreateBroadcastMutation } =
-  MessagesApiSlice;
+export const {
+  useGetMessagesQuery,
+  useCreateBroadcastMutation,
+  useDeleteMessageMutation,
+} = MessagesApiSlice;
