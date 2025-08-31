@@ -1,16 +1,19 @@
 import dashboardPlanet from "@/assets/icons/dashboard-planet.png";
 import { Button } from "@/components/ui/button";
 import CustomOverviewCard from "@/custom-components/CustomOverviewCard";
+import { selectCurrentUser } from "@/pages/auth/authSlice";
 import {
   Files,
   MessageSquareText,
   MoveRight,
   WalletMinimal,
 } from "lucide-react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const user = useSelector(selectCurrentUser);
 
   return (
     <div>
@@ -20,7 +23,7 @@ const Dashboard = () => {
             <div className="flex flex-col gap-4">
               <p className="text-[#A0AEC0] text-sm">Welcome Back,</p>
               <p className="text-[#ffffff] text-2xl md:text-3xl ">
-                Mubarak Ibrahim
+                {user?.company_name}
               </p>
               <p className="text-[#A0AEC0] text-sm">Glad to see you again!</p>
               <p className="text-[#A0AEC0] text-sm">
