@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@/pages/auth/authSlice";
 import { Check } from "lucide-react";
+import { useEditUserMutation } from "@/pages/auth/userApiSlice";
+import CustomTextArea from "@/components/inputs/CustomTextArea";
 
 const Account = () => {
   const {
@@ -15,12 +17,14 @@ const Account = () => {
     formState: { errors, isSubmitting },
   } = useForm<AccountSchema>({ resolver: zodResolver(accountSchema) });
 
+  const [editUser] = useEditUserMutation();
+
   const { showToast } = useToast();
   const currentUser = useSelector(selectCurrentUser);
 
   const onSubmit: SubmitHandler<AccountSchema> = async (data) => {
     try {
-      // await sendBroadcast(body).unwrap();
+      await editUser(data).unwrap();
       console.log(data);
       showToast("Profile updated successfully", "success");
     } catch (error) {
@@ -31,7 +35,7 @@ const Account = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div>
           <div>
             <CustomTextField
@@ -39,25 +43,34 @@ const Account = () => {
               placeholder="Type your username here"
               register={register("username")}
               errorMessage={errors.username}
-              value={currentUser.username}
+              defaultValue={currentUser?.username}
               // className="my-3"
             />
 
             <CustomTextField
-              label="Phone Number"
-              placeholder="Type your phone number here"
-              register={register("phone")}
-              errorMessage={errors.phone}
-              // value={currentUser}
+              label="Company Name"
+              placeholder="Type your company name here"
+              register={register("company_name")}
+              errorMessage={errors.company_name}
+              defaultValue={currentUser?.company_name}
               className="my-3"
             />
 
             <CustomTextField
+              label="Company Address"
+              placeholder="Type your company address here"
+              register={register("address")}
+              errorMessage={errors.address}
+              defaultValue={currentUser?.address}
+              className="my-3"
+            />
+
+            <CustomTextArea
               label="Description"
-              placeholder="Type your description here"
+              placeholder="Type your company description here"
               register={register("description")}
               errorMessage={errors.description}
-              value={currentUser.description}
+              defaultValue={currentUser?.description}
               className="my-3"
             />
           </div>

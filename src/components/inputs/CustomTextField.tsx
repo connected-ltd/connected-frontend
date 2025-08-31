@@ -12,6 +12,7 @@ interface CustomTextFieldProps {
   errorMessage?: FieldError | undefined;
   className?: string;
   value?: string;
+  defaultValue?: string;
   disabled?: boolean;
   checkPassword?: boolean;
 }
@@ -24,6 +25,7 @@ const CustomTextField = ({
   errorMessage,
   className,
   value,
+  defaultValue,
   disabled,
   checkPassword,
 }: CustomTextFieldProps) => {
@@ -41,6 +43,7 @@ const CustomTextField = ({
           placeholder={placeholder}
           value={value}
           disabled={disabled}
+          defaultValue={defaultValue}
           {...register}
           className={`border border-[#E2E8F0] text-text-primary rounded w-full p-4 text-sm h-10 focus:border-primary focus:border-2 focus:outline-none`}
         />

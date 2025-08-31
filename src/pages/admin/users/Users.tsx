@@ -1,9 +1,17 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
-import EmptyState from "@/components/ui/EmptyState";
 import CustomTable from "@/custom-components/CustomTable";
-import { Edit, Plus, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
+import EmptyState from "@/components/ui/EmptyState";
+import AddUserModal from "@/components/ui/AddUserModal";
 
 const Users = () => {
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  const handleAddUser = () => setModalOpen(true);
+
+  const handleModalClose = () => setModalOpen(false);
+
   const columns = [
     {
       key: "id",
@@ -48,36 +56,36 @@ const Users = () => {
     </div>
   );
 
-  const handleAddNewUser = () => {
-    console.log("New user");
-  };
-
   return (
     <div>
-      <div className="flex justify-end mb-4">
-        <Button onClick={handleAddNewUser}>
-          <Plus /> New User
-        </Button>
+      <AddUserModal open={modalOpen} onClose={handleModalClose} />
+      <div>
+        <h2 className="font-semibold">User List</h2>
+        <p className="text-[#71717A] dark:text-[#5a5a5f]">
+          Here's a list of all users enrolled.
+        </p>
       </div>
-      <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
-        {/* {messages && messages?.data.length === 0 ? ( */}
-        {usersData && usersData.length === 0 ? (
-          <EmptyState
-            header="No Users Found"
-            message="Users hasn't been added yet."
-          />
-        ) : (
-          <div className="overflow-x-auto">
-            <div>
-              <CustomTable
-                columns={columns}
-                data={usersData ?? []}
-                actions={customActions}
-                // isFetching={isFetchingMessages}
-              />
-            </div>
-          </div>
-        )}
+      <div>
+        <div className="flex justify-end mb-4">
+          <Button onClick={handleAddUser}>Add user</Button>
+        </div>
+
+        <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
+          {/* {messages && messages?.data.length === 0 ? ( */}
+          {usersData && usersData.length === 0 ? (
+            <EmptyState
+              header="No Users Found"
+              message="Users hasn't been added yet."
+            />
+          ) : (
+            <CustomTable
+              columns={columns}
+              data={usersData ?? []}
+              actions={customActions}
+              // isFetching={isFetchingMessages}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

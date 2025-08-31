@@ -49,6 +49,10 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
 
   const onSubmit: SubmitHandler<CreateMessageSchema> = async (data) => {
     try {
+      if (typeof userId !== "number") {
+        showToast("User not found", "error");
+        return;
+      }
       const body = {
         ...data,
         user_id: userId,

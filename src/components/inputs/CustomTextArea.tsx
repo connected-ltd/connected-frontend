@@ -12,6 +12,7 @@ interface CustomTextAreaProps {
   errorMessage?: FieldError | undefined;
   className?: string;
   value?: string;
+  defaultValue?: string;
   disabled?: boolean;
   checkPassword?: boolean;
 }
@@ -23,6 +24,7 @@ const CustomTextArea = ({
   errorMessage,
   className,
   value,
+  defaultValue,
   disabled,
   checkPassword,
 }: CustomTextAreaProps) => {
@@ -40,6 +42,7 @@ const CustomTextArea = ({
           id={label}
           placeholder={placeholder}
           value={value}
+          defaultValue={defaultValue}
           disabled={disabled}
           {...register}
           className={`border border-[#E2E8F0] text-text-primary rounded w-full p-4 text-sm focus:border-primary focus:border-2 focus:outline-none`}

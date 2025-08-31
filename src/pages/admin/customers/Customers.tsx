@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
-import EmptyState from "@/components/ui/EmptyState";
 import CustomTable from "@/custom-components/CustomTable";
-import { Edit, Plus, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
+import EmptyState from "@/components/ui/EmptyState";
 
-const Users = () => {
+const Customers = () => {
   const columns = [
     {
       key: "id",
@@ -48,36 +47,31 @@ const Users = () => {
     </div>
   );
 
-  const handleAddNewUser = () => {
-    console.log("New user");
-  };
-
   return (
     <div>
-      <div className="flex justify-end mb-4">
-        <Button onClick={handleAddNewUser}>
-          <Plus /> New User
-        </Button>
+      <div>
+        <h2 className="font-semibold">Customers</h2>
+        <p className="text-[#71717A] dark:text-[#5a5a5f]">
+          Here's a list of all organizations registered.
+        </p>
       </div>
-      <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
-        {/* {messages && messages?.data.length === 0 ? ( */}
-        {usersData && usersData.length === 0 ? (
-          <EmptyState
-            header="No Users Found"
-            message="Users hasn't been added yet."
-          />
-        ) : (
-          <div className="overflow-x-auto">
-            <div>
-              <CustomTable
-                columns={columns}
-                data={usersData ?? []}
-                actions={customActions}
-                // isFetching={isFetchingMessages}
-              />
-            </div>
-          </div>
-        )}
+      <div>
+        <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
+          {/* {messages && messages?.data.length === 0 ? ( */}
+          {usersData && usersData.length === 0 ? (
+            <EmptyState
+              header="No Users Found"
+              message="Users hasn't been added yet."
+            />
+          ) : (
+            <CustomTable
+              columns={columns}
+              data={usersData ?? []}
+              actions={customActions}
+              // isFetching={isFetchingMessages}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -128,4 +122,4 @@ const usersData = [
   },
 ];
 
-export default Users;
+export default Customers;

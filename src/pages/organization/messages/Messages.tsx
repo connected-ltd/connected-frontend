@@ -3,21 +3,26 @@ import { Button } from "@/components/ui/button";
 import CustomTable from "@/custom-components/CustomTable";
 import { Trash } from "lucide-react";
 import CreateMessageModal from "@/components/ui/CreateMessageModal";
-import { useGetMessagesQuery } from "../organization-api/messagesApiSlice";
+import {
+  useDeleteMessageMutation,
+  useGetMessagesQuery,
+} from "../organization-api/messagesApiSlice";
 import EmptyState from "@/components/ui/EmptyState";
 import PageHeader from "@/components/ui/PageHeader";
+import DeleteItemModal from "@/components/ui/DeleteItemModal";
+import { Message } from "@/types/messages.types";
+import { useToast } from "@/context/ToastContext";
 
 const Messages = () => {
   const { data: messages, isLoading: isFetchingMessages } =
     useGetMessagesQuery();
   const columns = [
-    // {
-    //   key: "location",
-    //   header: "Location",
-    //   width: "col-span-2",
-    //   filterable: true,
-    // },
-    // { key: "code", header: "Code", width: "col-span-2", filterable: true },
+    {
+      key: "area",
+      header: "Location",
+      width: "col-span-3",
+      filterable: true,
+    },
     {
       key: "message",
       header: "Message/ Broadcast",
@@ -27,20 +32,55 @@ const Messages = () => {
   ];
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedMessage, setSelectedMessage] = useState<any>(null);
+  const [deleteMessageRequest, { isLoading }] = useDeleteMessageMutation();
+  const { showToast } = useToast();
 
   const handleCreateNew = () => setModalOpen(true);
+  const handleDeleteMessageModal = (message: Message) => {
+    setSelectedMessage(message);
+    setDeleteModal(true);
+  };
 
   const handleModalClose = () => setModalOpen(false);
+  const handleCloseDeleteMessageModal = () => setDeleteModal(false);
 
-  const customActions = (
-    <button className="text-gray-500 hover:text-gray-700">
+  const handleDeleteMessage = async (message: Message) => {
+    if (message) {
+      console.log("Delete message id:", message);
+      try {
+        await deleteMessageRequest({ id: message.id }).unwrap();
+        handleCloseDeleteMessageModal();
+        showToast("Message deleted successfully", "success");
+      } catch (error) {
+        console.error("Failed to delete the message: ", error);
+        showToast("Something went wrong", "error");
+      }
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const customActions = (row: any) => (
+    <button
+      className="text-gray-500 hover:text-gray-700"
+      onClick={() => handleDeleteMessageModal(row)}
+    >
       <Trash size={18} />
     </button>
   );
 
   return (
-    <div className="overflow-scroll">
+    <div>
       <CreateMessageModal open={modalOpen} onClose={handleModalClose} />
+      <DeleteItemModal
+        open={deleteModal}
+        onClose={handleCloseDeleteMessageModal}
+        handlSubmit={handleDeleteMessage}
+        isLoading={isLoading}
+        message={selectedMessage}
+      />
       <PageHeader
         header={"Messages"}
         subHeader={"Here's a list of all your messages."}
@@ -58,7 +98,7 @@ const Messages = () => {
             />
           ) : (
             <div className="overflow-x-auto">
-              <div className="min-w-6xl">
+              <div>
                 <CustomTable
                   columns={columns}
                   data={messages?.data ?? []}

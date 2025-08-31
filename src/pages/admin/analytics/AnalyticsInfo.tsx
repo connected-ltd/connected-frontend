@@ -1,34 +1,14 @@
-import { Button } from "@/components/ui/button";
-import EmptyState from "@/components/ui/EmptyState";
 import CustomTable from "@/custom-components/CustomTable";
-import { Edit, Plus, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
+import EmptyState from "@/components/ui/EmptyState";
+import InOutBarChart from "@/components/charts/InOutBarChart";
 
-const Users = () => {
+const AnalyticsInfo = () => {
   const columns = [
-    {
-      key: "id",
-      header: "S/N",
-      width: "col-span-1",
-      filterable: true,
-    },
-    {
-      key: "name",
-      header: "Name",
-      width: "col-span-3",
-      filterable: true,
-    },
-    {
-      key: "email",
-      header: "Email",
-      width: "col-span-3",
-      filterable: true,
-    },
-    {
-      key: "role",
-      header: "Role",
-      width: "col-span-2",
-      filterable: true,
-    },
+    { key: "id", header: "S/N", width: "col-span-1", filterable: true },
+    { key: "name", header: "Name", width: "col-span-3", filterable: true },
+    { key: "email", header: "Email", width: "col-span-3", filterable: true },
+    { key: "role", header: "Role", width: "col-span-2", filterable: true },
     {
       key: "status",
       header: "Activity Status",
@@ -48,35 +28,34 @@ const Users = () => {
     </div>
   );
 
-  const handleAddNewUser = () => {
-    console.log("New user");
-  };
+  // sample values
+  const labels = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thur"];
+  const inData = [300, 310, 400, 620, 450, 470, 530];
+  const outData = [410, 550, 700, 360, 640, 310, 650];
 
   return (
-    <div>
-      <div className="flex justify-end mb-4">
-        <Button onClick={handleAddNewUser}>
-          <Plus /> New User
-        </Button>
+    <div className="space-y-6">
+      <div>
+        <h2 className="font-semibold">Analytics</h2>
+        <p className="text-[#71717A] dark:text-[#5a5a5f]">
+          Here's some analytics of messages sent.
+        </p>
       </div>
+
+      <InOutBarChart labels={labels} inData={inData} outData={outData} />
+
       <div className="bg-[#F6F5F4] dark:bg-[#A2C8E8] p-2 rounded-lg">
-        {/* {messages && messages?.data.length === 0 ? ( */}
         {usersData && usersData.length === 0 ? (
           <EmptyState
             header="No Users Found"
             message="Users hasn't been added yet."
           />
         ) : (
-          <div className="overflow-x-auto">
-            <div>
-              <CustomTable
-                columns={columns}
-                data={usersData ?? []}
-                actions={customActions}
-                // isFetching={isFetchingMessages}
-              />
-            </div>
-          </div>
+          <CustomTable
+            columns={columns}
+            data={usersData ?? []}
+            actions={customActions}
+          />
         )}
       </div>
     </div>
@@ -128,4 +107,4 @@ const usersData = [
   },
 ];
 
-export default Users;
+export default AnalyticsInfo;

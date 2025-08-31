@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import { User } from "@/types/user.types";
 
 interface UsersState {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any;
+  data: User | null;
   access_token: string;
   refresh_token: string;
 }

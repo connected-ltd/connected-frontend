@@ -2,7 +2,10 @@ export interface File {
   created_at: string;
   id: number;
   name: string;
+  shortcode: string | null;
   updated_at: string;
+  user_id: number;
+  whatsapp_number: string | null;
 }
 
 // export interface AreaStats {

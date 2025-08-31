@@ -10,13 +10,16 @@ import { useAppDispatch } from "../app/hooks";
 // Admin routes
 import AdminDashboard from "../pages/admin/dashboard/AdminDashboard";
 import Dashboard from "../pages/organization/dashboard/Dashboard";
-import AddNumbers from "../pages/admin/numbers/AddNumbers";
 import Landing from "../pages/landing/Landing";
 import Messages from "@/pages/organization/messages/Messages";
 import Files from "@/pages/organization/files/Files";
 import Analytics from "@/pages/organization/analytics/Analytics";
 import Settings from "@/pages/organization/settings/Settings";
 import Auth from "@/pages/auth/Auth";
+import Users from "@/pages/admin/users/Users";
+import Customers from "@/pages/admin/customers/Customers";
+import PaymentsInfo from "@/pages/admin/payments/PaymentsInfo";
+import AnalyticsInfo from "@/pages/admin/analytics/AnalyticsInfo";
 // Organization routes
 
 type ProtectedRoute = {
@@ -108,7 +111,10 @@ const Router = () => {
           }
         >
           <Route path="/dashboard" element={<AdminDashboard />} />
-          <Route path="/add-number" element={<AddNumbers />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/analytics" element={<AnalyticsInfo />} />
+          <Route path="/payments" element={<PaymentsInfo />} />
         </Route>
       ) : (
         // Organization route

@@ -86,7 +86,7 @@ const Payments = () => {
           />
         ) : (
           <div className="overflow-x-auto">
-            <div className="min-w-6xl">
+            <div>
               <CustomTable columns={columns} data={paymentsData ?? []} />
             </div>
           </div>
