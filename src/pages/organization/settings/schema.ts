@@ -23,5 +23,10 @@ export const passwordSchema = z
     path: ["confirm_password"],
   });
 
+export const creditSchema = z.object({
+  amount: z.number().min(200, "Amount should be larger than 200 naira"),
+});
+
 export type AccountSchema = z.infer<typeof accountSchema>;
 export type PasswordSchema = z.infer<typeof passwordSchema>;
+export type CreditSchema = z.infer<typeof creditSchema>;

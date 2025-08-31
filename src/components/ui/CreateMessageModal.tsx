@@ -66,7 +66,7 @@ const CreateMessageModal: React.FC<CreateMessageModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#F5F5F566] backdrop-blur-sm ">
-      <div className="bg-bg-primary rounded-lg shadow-lg p-6 w-full max-w-md">
+      <div className="bg-bg-primary rounded-lg shadow-lg p-6 w-1/4 min-w-sm">
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-lg font-semibold text-text-primary">
             Create New Message

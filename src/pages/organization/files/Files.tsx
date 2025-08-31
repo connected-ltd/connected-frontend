@@ -1,10 +1,11 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import CustomTable from "@/custom-components/CustomTable";
 import { Trash } from "lucide-react";
 import EmptyState from "@/components/ui/EmptyState";
 import { useGetFilesQuery } from "../organization-api/filesApiSlice";
 import AddFileModal from "@/components/ui/AddFileModal";
+import PageHeader from "@/components/ui/PageHeader";
+import { useState } from "react";
 
 const Files = () => {
   const { data: files, isLoading: isFetchingMessages } = useGetFilesQuery();
@@ -24,7 +25,7 @@ const Files = () => {
     },
   ];
 
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleCreateNew = () => setModalOpen(true);
 
@@ -39,12 +40,10 @@ const Files = () => {
   return (
     <div>
       <AddFileModal open={modalOpen} onClose={handleModalClose} />
-      <div>
-        <h2 className="font-semibold">Files</h2>
-        <p className="text-[#71717A] dark:text-[#5a5a5f]">
-          Here's a list of all files you've added.
-        </p>
-      </div>
+      <PageHeader
+        header={"Files"}
+        subHeader={"Here's a list of all files you've added."}
+      />
       <div>
         <div className="flex justify-end mb-4">
           <Button onClick={handleCreateNew}>Create New</Button>
@@ -57,12 +56,16 @@ const Files = () => {
               message="You haven't added any file yet."
             />
           ) : (
-            <CustomTable
-              columns={columns}
-              data={files?.data ?? []}
-              actions={customActions}
-              isFetching={isFetchingMessages}
-            />
+            <div className="overflow-x-auto">
+              <div className="min-w-6xl">
+                <CustomTable
+                  columns={columns}
+                  data={files?.data ?? []}
+                  actions={customActions}
+                  isFetching={isFetchingMessages}
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

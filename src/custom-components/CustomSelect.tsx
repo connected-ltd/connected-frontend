@@ -1,9 +1,9 @@
-import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Stack, Typography, alpha, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
 import { KeyboardArrowDown } from "@mui/icons-material";
+import { useState } from "react";
 
 interface Props {
   options: { name: string | number; value: string | number }[];
@@ -20,7 +20,7 @@ export default function CustomSelect({
   onChange,
   disabled,
 }: Props) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
   const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {

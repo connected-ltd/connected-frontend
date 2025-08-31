@@ -64,7 +64,7 @@ const HeatmapControls: React.FC<HeatmapControlsProps> = ({
         {/* Controls Content */}
         <div className="p-4">
           {/* Desktop Header */}
-          <h3 className="hidden md:block text-lg font-semibold mb-4 text-text-primary">
+          <h3 className="hidden md:block text-sm md:text-lg font-semibold mb-4 text-text-primary">
             Heatmap Controls
           </h3>
 
@@ -88,7 +88,7 @@ const HeatmapControls: React.FC<HeatmapControlsProps> = ({
 
             {/* Radius Control */}
             <div>
-              <label className="block text-sm font-medium text-text-primary mb-3">
+              <label className="block text-xs md:text-sm font-medium text-text-primary mb-3">
                 Radius: <span className="font-semibold">{radius}px</span>
               </label>
               <input
@@ -107,7 +107,7 @@ const HeatmapControls: React.FC<HeatmapControlsProps> = ({
 
             {/* Opacity Control */}
             <div>
-              <label className="block text-sm font-medium text-text-primary mb-3">
+              <label className="block text-xs md:text-sm font-medium text-text-primary mb-3">
                 Opacity:{" "}
                 <span className="font-semibold">
                   {(opacity * 100).toFixed(0)}%
@@ -130,7 +130,7 @@ const HeatmapControls: React.FC<HeatmapControlsProps> = ({
 
             {/* Intensity Control */}
             <div>
-              <label className="block text-sm font-medium text-text-primary mb-3">
+              <label className="block text-xs md:text-sm font-medium text-text-primary mb-3">
                 Intensity: <span className="font-semibold">{intensity}</span>
               </label>
               <input

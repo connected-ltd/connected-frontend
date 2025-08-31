@@ -2,6 +2,7 @@ import EmptyState from "@/components/ui/EmptyState";
 import LGAHeatmap from "./LgaHeatMap";
 import CustomTable from "@/custom-components/CustomTable";
 import { Trash } from "lucide-react";
+import PageHeader from "@/components/ui/PageHeader";
 
 const Analytics = () => {
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_CLOUD_API_KEY;
@@ -46,12 +47,12 @@ const Analytics = () => {
   );
 
   return (
-    <div className="p-6">
-      <div className="space-y-6">
-        <h1 className="text-2xl font-bold text-gray-900">
-          LGA Heatmaps Analytics
-        </h1>
-
+    <div>
+      <PageHeader
+        header={"Analytics"}
+        subHeader={"View your heatmap and analytics here"}
+      />
+      <div className="space-y-6 my-4">
         <LGAHeatmap
           googleMapsApiKey={googleMapsApiKey}
           className="w-full h-[50vh] rounded-lg border border-gray-200"
@@ -65,12 +66,16 @@ const Analytics = () => {
               message="Questions hasn't been asked yet."
             />
           ) : (
-            <CustomTable
-              columns={columns}
-              data={faqs ?? []}
-              actions={customActions}
-              // isFetching={isFetchingMessages}
-            />
+            <div className="overflow-x-auto">
+              <div className="min-w-6xl">
+                <CustomTable
+                  columns={columns}
+                  data={faqs ?? []}
+                  actions={customActions}
+                  // isFetching={isFetchingMessages}
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

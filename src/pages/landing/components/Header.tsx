@@ -1,4 +1,3 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
@@ -16,6 +15,7 @@ import connectedLogoLight from "../../../assets/icons/connected-logo-light.svg";
 import connectedLogoDark from "../../../assets/icons/connected-logo-dark.svg";
 import flag from "../../../assets/icons/flag.svg";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const drawerWidth = 240;
 // const navItems = ["Home", "Services", "About", "Contact"];
@@ -27,7 +27,7 @@ const navItems = [
 ];
 
 const Header = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { mode, toggleColorMode } = useThemeContext();
   const theme = useTheme();
   const navigate = useNavigate();
