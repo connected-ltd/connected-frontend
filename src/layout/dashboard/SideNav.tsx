@@ -193,9 +193,9 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
             </div>
             <div>
               <p className="text-xs md:text-sm text-[#1A1A1A] font-semibold">
-                Mubarak Ibrahim
+                {user?.company_name.split(" ")[0]}
               </p>
-              <p className="text-xs text-[#1A1A1A]">Admin</p>
+              {/* <p className="text-xs text-[#1A1A1A]">Admin</p> */}
             </div>
           </div>
 
