@@ -10,13 +10,12 @@ const Messages = () => {
   const { data: messages, isLoading: isFetchingMessages } =
     useGetMessagesQuery();
   const columns = [
-    // {
-    //   key: "location",
-    //   header: "Location",
-    //   width: "col-span-2",
-    //   filterable: true,
-    // },
-    // { key: "code", header: "Code", width: "col-span-2", filterable: true },
+    {
+      key: "area",
+      header: "Location",
+      width: "col-span-3",
+      filterable: true,
+    },
     {
       key: "message",
       header: "Message/ Broadcast",
@@ -31,8 +30,15 @@ const Messages = () => {
 
   const handleModalClose = () => setModalOpen(false);
 
+  const handleDeleteMessage = () => {
+    console.log("Delete message");
+  };
+
   const customActions = (
-    <button className="text-gray-500 hover:text-gray-700">
+    <button
+      className="text-gray-500 hover:text-gray-700"
+      onClick={handleDeleteMessage}
+    >
       <Trash size={18} />
     </button>
   );

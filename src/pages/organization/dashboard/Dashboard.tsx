@@ -60,7 +60,7 @@ const overviewCardItems = [
   {
     id: 1,
     title: "Fund Unit Wallet",
-    link: "#",
+    link: "/settings",
     icon: <WalletMinimal className="text-primary" />,
   },
   {

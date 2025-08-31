@@ -7,7 +7,8 @@ import {
 import Account from "./settings-tabs/Account";
 import Permissions from "./settings-tabs/Permissions";
 import Payments from "./settings-tabs/Payments";
-import Users from "./settings-tabs/Users";
+// import Users from "./settings-tabs/Users";
+import ChangePassword from "./settings-tabs/ChangePassword";
 
 const Settings = () => {
   return (
@@ -24,9 +25,9 @@ const Settings = () => {
             <TabsTrigger value="account" className="rounded-t-lg">
               Account
             </TabsTrigger>
-            <TabsTrigger value="users" className="rounded-t-lg">
+            {/* <TabsTrigger value="users" className="rounded-t-lg">
               Users
-            </TabsTrigger>
+            </TabsTrigger> */}
             <TabsTrigger value="permissions" className="rounded-t-lg">
               Permissions
             </TabsTrigger>
@@ -36,16 +37,21 @@ const Settings = () => {
           </TabsList>
 
           <TabsContent value="account">
-            <div className="px-6 py-4">
-              <Account />
+            <div className="px-6 py-4 flex flex-col gap-8 lg:flex-row justify-between items-start">
+              <div className="w-full max-w-md lg:w-2/5">
+                <Account />
+              </div>
+              <div className="w-full max-w-md lg:w-2/5">
+                <ChangePassword />
+              </div>
             </div>
           </TabsContent>
 
-          <TabsContent value="users">
+          {/* <TabsContent value="users">
             <div className="px-6 py-4">
               <Users />
             </div>
-          </TabsContent>
+          </TabsContent> */}
 
           <TabsContent value="permissions">
             <div className="px-6 py-4">

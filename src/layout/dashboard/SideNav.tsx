@@ -5,12 +5,15 @@ import { logout, selectCurrentUser } from "../../pages/auth/authSlice";
 import { Button } from "@/components/ui/button";
 import {
   LayoutDashboard,
-  Plus,
   ChevronLeft,
   FileText,
   BarChart3,
   Mail,
   Settings,
+  Users,
+  ListOrdered,
+  ChartColumnIncreasing,
+  Wallet,
 } from "lucide-react";
 
 // Import your logo assets
@@ -64,9 +67,24 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
       link: "/dashboard",
     },
     {
-      text: "Add Number",
-      icon: Plus,
-      link: "/add-number",
+      text: "User List",
+      icon: Users,
+      link: "/users",
+    },
+    {
+      text: "Customers",
+      icon: ListOrdered,
+      link: "/customers",
+    },
+    {
+      text: "Analytics",
+      icon: ChartColumnIncreasing,
+      link: "/analytics",
+    },
+    {
+      text: "Payments",
+      icon: Wallet,
+      link: "/payments",
     },
   ];
 
