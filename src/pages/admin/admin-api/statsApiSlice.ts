@@ -63,6 +63,21 @@ const StatsApiSlice = apiSliceWithTags.injectEndpoints({
       }),
       invalidatesTags: ["numbers"],
     }),
+    editNumber: builder.mutation<Numbers, NumbersInput & { id: number }>({
+      query: (values) => ({
+        url: `/numbers/${values.id}`,
+        method: "PATCH",
+        body: { ...values },
+      }),
+      invalidatesTags: ["numbers"],
+    }),
+    deleteNumber: builder.mutation<unknown, { id: number }>({
+      query: ({ id }) => ({
+        url: `/numbers/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["numbers"],
+    }),
   }),
 });
 
@@ -74,4 +89,6 @@ export const {
   useGetAreaStatsQuery,
   useGetShortcodesQuery,
   useCreateNumbersMutation,
+  useDeleteNumberMutation,
+  useEditNumberMutation,
 } = StatsApiSlice;

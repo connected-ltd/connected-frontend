@@ -49,7 +49,6 @@ const Messages = () => {
 
   const handleDeleteMessage = async (message: Message) => {
     if (message) {
-      console.log("Delete message id:", message);
       try {
         await deleteMessageRequest({ id: message.id }).unwrap();
         handleCloseDeleteMessageModal();

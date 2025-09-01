@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useToast } from "@/context/ToastContext";
 import {
   useCreateNumbersMutation,
+  useEditNumberMutation,
   useGetAreasQuery,
 } from "@/pages/admin/admin-api/statsApiSlice";
 import CustomSelect from "../inputs/CustomSelect";
@@ -12,36 +13,69 @@ import { Button } from "./button";
 import { addUserSchema, AddUserSchema } from "@/pages/admin/users/schema";
 import CustomTextField from "../inputs/CustomTextField";
 
+import { Numbers } from "@/types/number.types";
+
 interface AddUserModalProps {
   open: boolean;
   onClose: () => void;
+  numberToEdit?: Numbers | null;
 }
 
-const AddUserModal: React.FC<AddUserModalProps> = ({ open, onClose }) => {
+const AddUserModal: React.FC<AddUserModalProps> = ({
+  open,
+  onClose,
+  numberToEdit,
+}) => {
+  const isEdit = Boolean(numberToEdit);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<AddUserSchema>({
     resolver: zodResolver(addUserSchema),
-    defaultValues: {
-      area_id: "",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } as any,
+    defaultValues: isEdit
+      ? {
+          number: numberToEdit?.number || "",
+          language: numberToEdit?.language || "",
+          area_id: (numberToEdit?.area_id as number) || undefined,
+        }
+      : {
+          area_id: undefined,
+          language: "",
+          number: "",
+        },
   });
 
   const { showToast } = useToast();
   const { data: areas, isLoading: isFetchingAreas } = useGetAreasQuery();
   const [addUser] = useCreateNumbersMutation();
+  const [editNumber] = useEditNumberMutation();
+
+  React.useEffect(() => {
+    if (isEdit && numberToEdit) {
+      reset({
+        number: numberToEdit.number,
+        language: numberToEdit.language,
+        area_id: (numberToEdit.area_id as number) || undefined,
+      });
+    } else {
+      reset({ area_id: undefined, language: "", number: "" });
+    }
+  }, [isEdit, numberToEdit, reset]);
 
   const onSubmit: SubmitHandler<AddUserSchema> = async (data) => {
     try {
-      // console.log(data);
-      await addUser(data).unwrap();
-      showToast("User added successfully", "success");
+      if (isEdit && numberToEdit) {
+        await editNumber({ ...data, id: numberToEdit.id }).unwrap();
+        showToast("User updated successfully", "success");
+      } else {
+        await addUser(data).unwrap();
+        showToast("User added successfully", "success");
+      }
       onClose();
     } catch (error) {
-      console.error("Error adding user:", error);
+      console.error("Error submitting user:", error);
       showToast("Something went wrong", "error");
     }
   };
@@ -59,7 +93,9 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ open, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#F5F5F566] backdrop-blur-sm ">
       <div className="bg-bg-primary rounded-lg shadow-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-lg font-semibold text-text-primary">Add User</h3>
+          <h3 className="text-lg font-semibold text-text-primary">
+            {isEdit ? "Edit User" : "Add User"}
+          </h3>
           <button onClick={onClose} className="cursor-pointer">
             <X className="text-text-primary" />
           </button>
@@ -118,7 +154,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ open, onClose }) => {
                 loading={isSubmitting}
                 disabled={isSubmitting}
               >
-                Add User
+                {isEdit ? "Edit User" : "Add User"}
               </Button>
             </div>
           </div>

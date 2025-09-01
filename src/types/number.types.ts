@@ -1,5 +1,6 @@
 export interface Numbers {
   area: string;
+  area_id: number;
   created_at: string;
   id: number;
   is_set: true;
