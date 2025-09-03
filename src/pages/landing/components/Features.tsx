@@ -1,10 +1,12 @@
-import { Box, Grid2, Typography } from "@mui/material";
+import { Box, Grid2, Typography, useTheme } from "@mui/material";
 import smsIcon from "../../../assets/icons/sms-icon.svg";
 import monitorIcon from "../../../assets/icons/monitor-icon.svg";
 import questionIcon from "../../../assets/icons/question-icon.svg";
 import contentIcon from "../../../assets/icons/content-icon.svg";
 
 const Features = () => {
+  const theme = useTheme();
+
   return (
     <Box sx={{ marginTop: "5em" }}>
       <Box id="services" sx={{ textAlign: { xs: "center", md: "left" } }}>
@@ -13,6 +15,7 @@ const Features = () => {
           sx={{
             fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
             fontWeight: 800,
+            color: theme.palette.text.primary,
           }}
         >
           Our <span style={{ color: "#2085BE" }}>Features</span>
@@ -23,6 +26,7 @@ const Features = () => {
             fontSize: { xs: ".9rem", md: "1rem" },
             margin: "1em 0",
             lineHeight: "30px",
+            color: theme.palette.text.primary,
           }}
         >
           ConnectED offers the following features to enhance the knowledge and

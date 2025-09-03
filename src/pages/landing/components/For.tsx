@@ -4,11 +4,13 @@ import {
   Typography,
   ToggleButtonGroup,
   ToggleButton,
+  useTheme,
 } from "@mui/material";
 import citizensIcon from "../../../assets/icons/citizens-icon.svg";
 import informationProviderIcon from "../../../assets/icons/information-provider-icon.svg";
 
 const For = () => {
+  const theme = useTheme();
   const [view, setView] = useState("citizens");
 
   const handleViewChange = (
@@ -38,6 +40,7 @@ const For = () => {
                 fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
                 fontWeight: 800,
                 marginBottom: { xs: ".5em", md: "0" },
+                color: theme.palette.text.primary,
               }}
             >
               <span style={{ color: "#2085BE" }}>ConnectED</span> For:

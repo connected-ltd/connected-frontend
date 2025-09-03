@@ -1,8 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import map from "../../../assets/icons/map.svg";
 import { FilledButton } from "../../../custom-components/styled/styledButtons";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const theme = useTheme();
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ marginTop: "5em" }}>
       <Box>
@@ -30,6 +34,7 @@ const Hero = () => {
               sx={{
                 fontSize: { xs: "2rem", md: "2.3rem", lg: "3rem" },
                 fontWeight: 800,
+                color: theme.palette.text.primary,
               }}
             >
               Bridging Knowledge Gaps, Empowering All with{" "}
@@ -43,6 +48,7 @@ const Hero = () => {
                 fontSize: { xs: ".9rem", md: "1rem" },
                 margin: "1em 0",
                 lineHeight: "30px",
+                color: theme.palette.text.primary,
               }}
             >
               In an era where personalized answers and tailored information are
@@ -57,6 +63,7 @@ const Hero = () => {
                 fontSize: "1rem",
                 margin: { xs: "1em 0", md: "0" },
               }}
+              onClick={() => navigate("/login")}
             >
               Open Account
             </FilledButton>

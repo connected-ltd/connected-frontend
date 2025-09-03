@@ -179,14 +179,14 @@ const Header = () => {
               ))}
             </Box>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Button
+              {/* <Button
                 sx={{
                   color: theme.palette.text.primary,
                   fontSize: { xs: ".6rem", md: ".7rem" },
                 }}
               >
                 Sign Up
-              </Button>
+              </Button> */}
               <FilledButton
                 sx={{
                   fontSize: { xs: ".6rem", md: ".7rem" },

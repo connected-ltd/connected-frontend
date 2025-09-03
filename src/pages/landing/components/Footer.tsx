@@ -59,7 +59,10 @@ const Footer = () => {
                 </Box>
                 <Typography
                   variant="body2"
-                  sx={{ fontSize: { xs: ".7rem", md: "1rem" } }}
+                  sx={{
+                    fontSize: { xs: ".7rem", md: "1rem" },
+                    color: "#fff",
+                  }}
                 >
                   {social.name}
                 </Typography>
@@ -100,6 +103,7 @@ const Footer = () => {
                   alignItems: "center",
                   gap: 2,
                   wordBreak: "break-all",
+                  color: "#fff",
                 }}
               >
                 <Mail sx={{ color: "#2085BE" }} /> info@connectedai.net
@@ -120,10 +124,10 @@ const Footer = () => {
                 variant="body2"
                 sx={{
                   fontSize: { xs: ".7rem", md: "1rem" },
-
                   display: "flex",
                   alignItems: "center",
                   gap: 2,
+                  color: "#fff",
                 }}
               >
                 <Call sx={{ color: "#2085BE" }} /> +234 703 525 1445
@@ -142,10 +146,10 @@ const Footer = () => {
                 variant="body2"
                 sx={{
                   fontSize: { xs: ".7rem", md: "1rem" },
-
                   display: "flex",
                   alignItems: "center",
                   gap: 2,
+                  color: "#fff",
                 }}
               >
                 <LocationOn sx={{ color: "#2085BE" }} /> 44A Isa Kaita Road
@@ -180,7 +184,7 @@ const Footer = () => {
             variant="body1"
             sx={{
               fontSize: { xs: ".6rem", sm: ".65rem", md: ".7rem" },
-              color: "grey",
+              color: "#fff",
             }}
           >
             &copy; {currentYear} ConnectED All rights reserved

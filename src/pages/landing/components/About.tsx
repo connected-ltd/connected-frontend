@@ -1,7 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import aboutIcon from "../../../assets/icons/about-icon.svg";
 
 const About = () => {
+  const theme = useTheme();
+
   return (
     <Box sx={{ marginTop: "5em" }} id="home">
       <Box
@@ -24,6 +26,7 @@ const About = () => {
             sx={{
               fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
               fontWeight: 800,
+              color: theme.palette.text.primary,
             }}
           >
             About <span style={{ color: "#2085BE" }}>ConnectED</span>
@@ -34,6 +37,7 @@ const About = () => {
               fontSize: { xs: ".9rem", md: "1rem" },
               margin: "2em 0",
               lineHeight: "30px",
+              color: theme.palette.text.primary,
             }}
           >
             At its core, ConnectED serves as a centralized digital hub,
@@ -49,6 +53,7 @@ const About = () => {
               fontSize: { xs: ".9rem", md: "1rem" },
               margin: "1em 0",
               lineHeight: "30px",
+              color: theme.palette.text.primary,
             }}
           >
             This platform goes beyond traditional means of communication by

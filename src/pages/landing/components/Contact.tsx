@@ -1,4 +1,4 @@
-import { Box, FormControl, Grid2, Typography } from "@mui/material";
+import { Box, FormControl, Grid2, Typography, useTheme } from "@mui/material";
 import contactLogo from "../../../assets/icons/contact-logo.svg";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -31,6 +31,7 @@ const Contact = () => {
   });
 
   const { mode } = useThemeContext();
+  const theme = useTheme();
 
   return (
     <Box sx={{ margin: "5em 0" }}>
@@ -41,6 +42,7 @@ const Contact = () => {
             sx={{
               fontSize: { xs: "2rem", md: "2.3rem", lg: "2.5rem" },
               fontWeight: 800,
+              color: theme.palette.text.primary,
             }}
           >
             Stay <span style={{ color: "#2085BE" }}>ConnectED</span> with our
@@ -52,6 +54,7 @@ const Contact = () => {
               fontSize: { xs: ".9rem", md: "1rem" },
               margin: "2em 0",
               lineHeight: "30px",
+              color: theme.palette.text.primary,
             }}
           >
             We would love to hear from you and discuss how we can help bring
@@ -82,6 +85,7 @@ const Contact = () => {
                       fontWeight: 600,
                       marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     Name
@@ -108,6 +112,7 @@ const Contact = () => {
                       fontWeight: 600,
                       marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     Email
@@ -135,6 +140,7 @@ const Contact = () => {
                       fontWeight: 600,
                       marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     Company
@@ -161,6 +167,7 @@ const Contact = () => {
                       fontWeight: 600,
                       marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     Subject
@@ -187,6 +194,7 @@ const Contact = () => {
                       fontWeight: 600,
                       marginBottom: { xs: "1.5em", md: ".5em" },
                       textTransform: "uppercase",
+                      color: theme.palette.text.primary,
                     }}
                   >
                     Message
