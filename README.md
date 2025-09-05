@@ -33,6 +33,12 @@ This is the **partner-facing dashboard** for NGOs/MDAs. Built with **React + Typ
 
 ---
 
+## License
+
+Proprietary for now. Planned **MIT** release in Q4 2025.
+
+---
+
 ## 📖 Usage
 
 ```bash
