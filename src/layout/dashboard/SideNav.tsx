@@ -122,7 +122,9 @@ function SideNav({ drawerWidth, handleDrawerToggle, mobileOpen }: Props) {
   ];
 
   const navItems =
-    user?.role === "admin" ? adminNavItems : organizationNavItems;
+    user?.role === "admin" || user?.role === "super_admin"
+      ? adminNavItems
+      : organizationNavItems;
 
   const drawer = (
     <div className="px-4 h-full overflow-auto">
