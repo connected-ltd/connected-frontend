@@ -1,9 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import map from "../../../assets/icons/map.svg";
 import { FilledButton } from "../../../custom-components/styled/styledButtons";
-import gitexSmall from "@/assets/images/gitex-small.jpg";
-import gitexMid from "@/assets/images/gitex-mid.jpg";
-import gitexLarge from "@/assets/images/gitex-large.jpg";
 
 const Hero = () => {
   return (
@@ -73,26 +70,6 @@ const Hero = () => {
             <Box sx={{ width: { md: "24em", lg: "31em" } }}>
               <img src={map} style={{ width: "100%" }} />
             </Box>
-          </Box>
-        </Box>
-
-        <Box
-          sx={{
-            margin: "5em 0",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
-        >
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <img src={gitexLarge} alt="Gitex banner" />
-          </Box>
-          <Box sx={{ display: { xs: "none", sm: "block", md: "none" } }}>
-            <img src={gitexMid} alt="Gitex banner" />
-          </Box>
-          <Box sx={{ display: { xs: "block", sm: "none" } }}>
-            <img src={gitexSmall} alt="Gitex banner" />
           </Box>
         </Box>
 
