@@ -3,7 +3,7 @@ import facebookIcon from "../../../assets/icons/facebook.svg";
 import twitterIcon from "../../../assets/icons/twitter.svg";
 import linkedinIcon from "../../../assets/icons/linkedin.svg";
 import instagramIcon from "../../../assets/icons/instagram.svg";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Call, LocationOn, Mail } from "@mui/icons-material";
 import connectedLogoDark from "../../../assets/icons/connected-logo-dark.svg";
 

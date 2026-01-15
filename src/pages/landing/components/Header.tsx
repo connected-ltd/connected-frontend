@@ -14,7 +14,7 @@ import { FilledButton } from "../../../custom-components/styled/styledButtons";
 import connectedLogoLight from "../../../assets/icons/connected-logo-light.svg";
 import connectedLogoDark from "../../../assets/icons/connected-logo-dark.svg";
 import flag from "../../../assets/icons/flag.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useState } from "react";
 
 const drawerWidth = 240;

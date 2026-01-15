@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, useNavigate } from "react-router";
 import Layout from "../layout/dashboard/Layout";
 import { useSelector } from "react-redux";
 import { login, selectCurrentUser } from "../pages/auth/authSlice";
