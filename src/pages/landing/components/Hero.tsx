@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import map from "../../../assets/icons/map.svg";
 import { FilledButton } from "../../../custom-components/styled/styledButtons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const Hero = () => {
   const theme = useTheme();

@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
@@ -12,38 +12,19 @@ const Landing = () => {
   return (
     <ThemeProviderWrapper>
       <CssBaseline />
-      <Box
-        sx={{
-          marginTop: "1em",
-          maxWidth: "1550px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            flexDirection: "column",
-          }}
-        >
+      <div className="mt-4 max-w-[1550px] flex flex-col justify-center items-center ml-auto mr-auto">
+        <div className="flex justify-center items-center w-full flex-col">
           <Header />
-          <Box sx={{ width: "92%" }}>
+          <div className="w-11/12">
             <Hero />
             <Features />
             <About />
             <For />
             <Contact />
-          </Box>
+          </div>
           <Footer />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </ThemeProviderWrapper>
   );
 };

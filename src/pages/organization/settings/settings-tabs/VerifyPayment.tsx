@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router";
 import LinearProgress from "@/components/ui/LinearProgress";
 import { useToast } from "@/context/ToastContext";
 import { useVerifyCreditPaymentMutation } from "../settingsApiSlice";

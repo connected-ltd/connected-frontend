@@ -9,7 +9,7 @@ import {
   WalletMinimal,
 } from "lucide-react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
   const navigate = useNavigate();
