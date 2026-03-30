@@ -6,6 +6,7 @@ export interface File {
   updated_at: string;
   user_id: number;
   whatsapp_number: string | null;
+  file_url: string;
 }
 
 // export interface AreaStats {

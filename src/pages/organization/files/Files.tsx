@@ -18,10 +18,22 @@ const Files = () => {
     {
       key: "name",
       header: "File Name",
+      width: "col-span-1",
+      filterable: true,
+    },
+    {
+      key: "file_url",
+      header: "File link",
       width: "col-span-6",
       filterable: true,
     },
-    { key: "shortcode", header: "Code", width: "col-span-2", filterable: true },
+    { key: "shortcode", header: "Code", width: "col-span-1", filterable: true },
+    {
+      key: "whatsapp_number",
+      header: "Whatsapp Number",
+      width: "col-span-2",
+      filterable: true,
+    },
   ];
 
   const [modalOpen, setModalOpen] = useState(false);
